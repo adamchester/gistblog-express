@@ -1,0 +1,7 @@
+--compilers coffee:coffee-script
+--require assert
+--watch
+--reporter spec
+--ui bdd
+--growl
+--timeout 6000

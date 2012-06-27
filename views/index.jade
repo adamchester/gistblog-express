@@ -1,0 +1,18 @@
+extends layout
+
+block content
+	each gist in gists
+		div(class='page-header well')
+			h1: a(href=gist.url)= gist.description
+			p
+			div(class='post-flags')
+				span(class='label label-info left')
+					i(class='icon-time icon-white')
+					| #{gist.created_at.toDateString()}
+				&nbsp;
+				a(href=gist.url + "#comments")
+					span(class='label label-info left')
+						i(class='icon-comment icon-white')
+						| #{gist.comments + "comments"}
+			p(class='blog-post')
+				script(src=gist.url + ".js")

@@ -1,0 +1,143 @@
+{
+	"created_at": "2012-06-17T13:26:41Z",
+	"history": [{
+		"user": {
+			"gravatar_id": "acf539a9cfc9f646dd85e81a948cb736",
+			"avatar_url": "https://secure.gravatar.com/avatar/acf539a9cfc9f646dd85e81a948cb736?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+			"login": "adamchester",
+			"url": "https://api.github.com/users/adamchester",
+			"id": 570470
+		},
+		"change_status": {
+			"deletions": 2,
+			"total": 4,
+			"additions": 2
+		},
+		"version": "0f425b402b236fb5c19d053539acb208ac9648df",
+		"committed_at": "2012-06-21T02:57:08Z",
+		"url": "https://api.github.com/gists/2944558/0f425b402b236fb5c19d053539acb208ac9648df"
+	}, {
+		"user": {
+			"gravatar_id": "acf539a9cfc9f646dd85e81a948cb736",
+			"avatar_url": "https://secure.gravatar.com/avatar/acf539a9cfc9f646dd85e81a948cb736?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+			"login": "adamchester",
+			"url": "https://api.github.com/users/adamchester",
+			"id": 570470
+		},
+		"change_status": {
+			"deletions": 0,
+			"total": 2,
+			"additions": 2
+		},
+		"version": "17b576fa19de919d1fb9b1e1a5abd4441a270a60",
+		"committed_at": "2012-06-21T02:55:50Z",
+		"url": "https://api.github.com/gists/2944558/17b576fa19de919d1fb9b1e1a5abd4441a270a60"
+	}, {
+		"user": {
+			"gravatar_id": "acf539a9cfc9f646dd85e81a948cb736",
+			"avatar_url": "https://secure.gravatar.com/avatar/acf539a9cfc9f646dd85e81a948cb736?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+			"login": "adamchester",
+			"url": "https://api.github.com/users/adamchester",
+			"id": 570470
+		},
+		"change_status": {
+			"deletions": 0,
+			"total": 2,
+			"additions": 2
+		},
+		"version": "a77ff479359530d66632c76e96861f0beac6a26f",
+		"committed_at": "2012-06-21T02:53:18Z",
+		"url": "https://api.github.com/gists/2944558/a77ff479359530d66632c76e96861f0beac6a26f"
+	}, {
+		"user": {
+			"gravatar_id": "acf539a9cfc9f646dd85e81a948cb736",
+			"avatar_url": "https://secure.gravatar.com/avatar/acf539a9cfc9f646dd85e81a948cb736?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+			"login": "adamchester",
+			"url": "https://api.github.com/users/adamchester",
+			"id": 570470
+		},
+		"change_status": {
+			"deletions": 23,
+			"total": 30,
+			"additions": 7
+		},
+		"version": "b487f3a2b0be28b6473f049796347c435775f17f",
+		"committed_at": "2012-06-21T02:51:43Z",
+		"url": "https://api.github.com/gists/2944558/b487f3a2b0be28b6473f049796347c435775f17f"
+	}, {
+		"user": {
+			"gravatar_id": "acf539a9cfc9f646dd85e81a948cb736",
+			"avatar_url": "https://secure.gravatar.com/avatar/acf539a9cfc9f646dd85e81a948cb736?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+			"login": "adamchester",
+			"url": "https://api.github.com/users/adamchester",
+			"id": 570470
+		},
+		"change_status": {
+			"deletions": 8,
+			"total": 8,
+			"additions": 0
+		},
+		"version": "217469d6e2ba240cecd6dd1920eea119c99bd1e8",
+		"committed_at": "2012-06-17T13:31:45Z",
+		"url": "https://api.github.com/gists/2944558/217469d6e2ba240cecd6dd1920eea119c99bd1e8"
+	}, {
+		"user": {
+			"gravatar_id": "acf539a9cfc9f646dd85e81a948cb736",
+			"avatar_url": "https://secure.gravatar.com/avatar/acf539a9cfc9f646dd85e81a948cb736?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+			"login": "adamchester",
+			"url": "https://api.github.com/users/adamchester",
+			"id": 570470
+		},
+		"change_status": {
+			"deletions": 8,
+			"total": 16,
+			"additions": 8
+		},
+		"version": "71f97ee8a25ad65a11b83fdd1f3bc39da09839fd",
+		"committed_at": "2012-06-17T13:27:05Z",
+		"url": "https://api.github.com/gists/2944558/71f97ee8a25ad65a11b83fdd1f3bc39da09839fd"
+	}, {
+		"user": {
+			"gravatar_id": "acf539a9cfc9f646dd85e81a948cb736",
+			"avatar_url": "https://secure.gravatar.com/avatar/acf539a9cfc9f646dd85e81a948cb736?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+			"login": "adamchester",
+			"url": "https://api.github.com/users/adamchester",
+			"id": 570470
+		},
+		"change_status": {
+			"deletions": 0,
+			"total": 31,
+			"additions": 31
+		},
+		"version": "e5c5247c90062b1f0107a25b73ed7a8636dcc731",
+		"committed_at": "2012-06-17T13:26:42Z",
+		"url": "https://api.github.com/gists/2944558/e5c5247c90062b1f0107a25b73ed7a8636dcc731"
+	}],
+	"user": {
+		"gravatar_id": "acf539a9cfc9f646dd85e81a948cb736",
+		"avatar_url": "https://secure.gravatar.com/avatar/acf539a9cfc9f646dd85e81a948cb736?d=https://a248.e.akamai.net/assets.github.com%2Fimages%2Fgravatars%2Fgravatar-140.png",
+		"login": "adamchester",
+		"url": "https://api.github.com/users/adamchester",
+		"id": 570470
+	},
+	"updated_at": "2012-06-21T02:51:43Z",
+	"public": true,
+	"forks": [],
+	"files": {
+		"blog_purpose.md": {
+			"type": "text/plain",
+			"filename": "blog_purpose.md",
+			"content": "This blog exists purely a learning experience.\n\nAs you may notice, the blog posts are actually github gists (http://gist.github.com/). It is based on [gistblog](liammclennan/gistblog) (see http://withouttheloop.com/).\n\nI am currently looking for a way to correctly render the github markdown (with full embedded syntax highlighting, etc).\n\nThe software behind this site utilises technologies including:\n* JavaScript/Node.JS - http://nodejs.org/\n* Express (NodeJS web framework) - http://expressjs.com/\n* Azure (Hosting/Deployment) - http://azure.com/\n* Twitter Bootstrap - http://twitter.github.com/bootstrap/",
+			"size": 609,
+			"language": "Markdown",
+			"raw_url": "https://gist.github.com/raw/2944558/a505be0303179e519b48ab4044e40e8994c38575/blog_purpose.md"
+		}
+	},
+	"git_pull_url": "git://gist.github.com/2944558.git",
+	"description": "This blog is purely a learning experience",
+	"html_url": "https://gist.github.com/2944558",
+	"id": "2944558",
+	"url": "https://api.github.com/gists/2944558",
+	"comments": 0,
+	"git_push_url": "git@gist.github.com:2944558.git"
+}

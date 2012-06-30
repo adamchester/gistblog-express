@@ -8,11 +8,11 @@ block content
 			div(class='post-flags')
 				span(class='label label-info left')
 					i(class='icon-time icon-white')
-					| #{gist.created_at.toDateString()}
+					|  #{gist.created_at}
 				&nbsp;
 				a(href=gist.url + "#comments")
 					span(class='label label-info left')
 						i(class='icon-comment icon-white')
-						| #{gist.comments + "comments"}
+						|  #{gist.comments} comments
 			p(class='blog-post')
 				script(src=gist.url + ".js")

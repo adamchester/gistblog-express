@@ -2,6 +2,7 @@
 assert = require 'assert'
 routes = require '../routes/about.js'
 
+
 describe 'about', ->
 
 	describe 'module', ->
@@ -15,6 +16,6 @@ describe 'about', ->
 				render: (name, model) ->
 					assert name is 'about'
 					assert model isnt undefined
-			
+
 			routes.About.index(req, res)
 

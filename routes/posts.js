@@ -3,9 +3,7 @@
  * GET home page.
  */
 
-var request = require('request')
-	, gists = require('../lib/gists.js');
-
+var gists = require('../lib/gists.js');
 
 var Posts = function() {
 

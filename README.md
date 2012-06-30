@@ -1,7 +1,7 @@
 Gistblog-express
 ================
 
-Gistblog-express is based on [gistblog](https://github.com/liammclennan/gistblog), but uses expressjs instead of geddy.
+Gistblog-express is based on [gistblog](https://github.com/liammclennan/gistblog), but uses expressjs instead of geddy, primarily so it would be easily deployed on the [azure](http://windowsazure.com) platform.
 
 To run:
 

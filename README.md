@@ -1,7 +1,7 @@
 Gistblog-express
 ================
 
-Gistblog-express is a [simple blog engine](https://gist.github.com/2821259) based on [gistblog](liammclennan/gistblog).
+Gistblog-express is based on [gistblog](https://github.com/liammclennan/gistblog), but uses expressjs instead of geddy.
 
 To run:
 

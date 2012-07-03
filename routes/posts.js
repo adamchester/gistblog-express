@@ -62,11 +62,13 @@ var Posts = function() {
 	}
 
 	function getPostViewModel(req, callback) {
+
+		var request = req;
 		getIndexViewModel(function(indexViewModel) {
 
 			// find the post in the index view model cache
 			var post = _.chain(indexViewModel.posts)
-				.filter(function(post) { return post.id === req.params.id})
+				.filter(function(post) { return post.id === request.params.id})
 				.first()
 				.value();
 
@@ -75,12 +77,14 @@ var Posts = function() {
 	}
 
 	this.index = function(req, res) {
+		
 		getIndexViewModel(function(indexViewModel) {
 			res.render('index', indexViewModel);
 		});
 	};
 
 	this.post = function(req, res) {
+
 		getPostViewModel(req, function(post) {
 			res.render('post', { title: post.title, post: post, homeNavClasses: '', aboutNavClasses: '' });
 		});

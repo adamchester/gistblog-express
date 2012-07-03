@@ -29,7 +29,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.Posts.index);
-app.get('/post/:id', routes.Posts.post);
+app.get('/posts/:id', routes.Posts.post);
 app.get('/about', routes.About.index);
 
 http.createServer(app).listen(app.get('port'), function(){

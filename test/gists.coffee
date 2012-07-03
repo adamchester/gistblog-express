@@ -1,19 +1,27 @@
 gists = require '../lib/gists.js'
 assert = require 'assert'
 nock = require 'nock'
+_ = require 'underscore'
 
 # use the nock library to capture requests to the github API
-mockGithubApiScope = (validGistsIds, invalidGistsId) ->
-	mock = nock('https://api.github.com/')
+mockGithubApis = (validGistsIds, invalidGistsId) ->
+	githubApi = nock('https://api.github.com/') #.log(console.log)
+	githubRaw = nock('https://gist.github.com/') #.log(console.log)
 
 	for validGistsId in validGistsIds
-		if validGistsId isnt undefined
-			mock.get("/gists/#{validGistsId}").replyWithFile(200, __dirname + "/assets/gists_#{validGistsId}.json") 
+		gistJsonPath = __dirname + "/assets/gists_#{validGistsId}.json"
+		gistData = require(gistJsonPath);
+		githubApi.get("/gists/#{validGistsId}").reply(200, gistData)
 
-	mock.get("/gists/#{invalidGistsId}").reply(404, 'not found') if invalidGistsId isnt undefined
-	mock.get('/users/invalid/gists').reply(404, 'not found')
-	mock.get('/users/adamchester/gists').replyWithFile(200, __dirname + '/assets/users_adamchester_gists.json')
-	mock
+		# get the expected raw URL from inside the gist data
+		# todo: find a way to filter the raw URLs better?
+		rawUrl = gistData.files[_(gistData.files).keys()[0]].raw_url;
+		githubRaw.get(rawUrl.replace('https://gist.github.com', '')).replyWithFile(200, __dirname + "/assets/raw_#{validGistsId}.md")
+
+	githubApi.get("/gists/#{invalidGistsId}").reply(404, 'not found') if invalidGistsId isnt undefined
+	githubApi.get('/users/invalid/gists').reply(404, 'not found')
+	githubApi.get('/users/adamchester/gists').replyWithFile(200, __dirname + '/assets/users_adamchester_gists.json')
+	return
 
 # some simple assert helpers
 assertCallbackSuccess = (result, error, done, additional) ->
@@ -36,17 +44,17 @@ assertHasFields = (object, fields) ->
 
 describe 'gists', ->
 
-	beforeEach -> scope = mockGithubApiScope [2944558, 2861047], 99999999
- 
 	describe 'module', ->
 		it 'should export', -> assert gists isnt undefined
 		it 'should export getGistMarkdown', -> assert gists.getGistMarkdown isnt undefined
 		it 'should export getGistHtml', -> assert gists.getGistHtml isnt undefined
-		it 'should export getBlogPosts', -> assert gists.getBlogPosts isnt undefined
-		it 'should export getAllBlogPostsContent', -> assert gists.getAllBlogPostsContent isnt undefined
+		it 'should export getBlogPostsForUser', -> assert gists.getBlogPostsForUser isnt undefined
+		it 'should export getBlogPost', -> assert gists.getBlogPost isnt undefined
 		it 'should not export toBlogPost', -> assert gists.toBlogPost is undefined
 
-	describe 'methods (gists)', ->
+	describe 'method', ->
+		beforeEach -> mockGithubApis [2944558, 2861047], 99999999
+		afterEach -> nock.cleanAll();
 
 		describe '#getGistMarkdown()', ->
 
@@ -74,22 +82,27 @@ describe 'gists', ->
 						assert not markdown
 						assert not html
 
-	describe 'methods (blog posts)', ->
+		describe '#getBlogPostsForUser()', ->
 
-		describe '#getAllBlogPostsContent()', ->
-
-			it 'should return objects with fields: [id, title, date, content_md, content_html]', (done) ->
-				gists.getAllBlogPostsContent 'adamchester', (posts, error) ->
+			it 'should return objects with fields: [id, title, date, content_md, content_html, comment_count]', (done) ->
+				gists.getBlogPostsForUser {username: 'adamchester', allContents: true}, (posts, error) ->
 					assertCallbackSuccess posts, error, done, ->
-						assertHasFields(post, ["id", "title", "date", "content_md", "content_html"]) for post in posts
-
-		describe '#getBlogPosts()', ->
+						assertHasFields(post, ["id", "title", "date", "content_md", "content_html", "comment_count"]) for post in posts
 
 			it 'should return null with an error when the user does not exist', (done) ->
-				gists.getBlogPosts 'invalid', (gistList, error) -> 
-					assertCallbackError gistList, error, done
+				gists.getBlogPostsForUser {username: 'invalid'}, (posts, error) -> 
+					assertCallbackError posts, error, done
 
-			it 'should return a gist list and make the callback', (done) ->
-				gists.getBlogPosts 'adamchester', (gistList) -> 
-					assertCallbackSuccess gistList, undefined, done
+		describe '#getBlogPost()', ->
+
+			it 'should return the post with fields: [id, title, date, content_md, content_html, comment_count]', (done) ->
+				gists.getBlogPost 2944558, (post, error) -> 
+					assertCallbackSuccess post, error, done, ->
+						assertHasFields(post, ["id", "title", "date", "content_md", "content_html", "comment_count"])
+
+			it 'should return null with an error when the post does not exist', (done) ->
+				gists.getBlogPost 99999999, (post, error) -> 
+					assertCallbackError post, error, done
+
+
 

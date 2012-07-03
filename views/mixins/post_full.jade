@@ -8,7 +8,7 @@ mixin post_full(post)
 				i(class='icon-time icon-white')
 				|  posted #{post.date.toDateString()}
 			&nbsp;
-			a(href=post.url + "#comments")
+			a(href=post.gist_url + "#comments")
 				span(class='label label-info left')
 					i(class='icon-comment icon-white')
 					|  #{post.comment_count} comments

@@ -19,7 +19,7 @@ var Posts = function() {
 
 	var lastGet = new Date(2000, 1, 1);
 	var isRefreshingIndexViewModel = false;
-	var getOptions = {username:'liammclennan', allContents: true};
+	var getOptions = {username:'adamchester', allContents: true};
 
 	function refreshIndexViewModel(callback) {
 

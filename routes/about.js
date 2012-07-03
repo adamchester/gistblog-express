@@ -11,6 +11,7 @@ var About = function() {
 		res.render('about', { 
 		homeNavClasses: '',
 		aboutNavClasses: 'active',
+		twitterNavClasses: '',
 		title: 'About rarely updated' });
 	};
 

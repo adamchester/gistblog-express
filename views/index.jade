@@ -1,7 +1,8 @@
 extends layout
 
-include mixins/post_full
+include mixins/post_no_content
 
 block content
-	each post in posts
-		mixin post_full(post)
+	p(id='post-list')
+		each post in posts
+			mixin post_no_content(post)

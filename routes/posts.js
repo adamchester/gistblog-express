@@ -14,6 +14,8 @@ var Posts = function() {
 		posts: [],
 		homeNavClasses: 'active',
 		aboutNavClasses: '',
+		twitterNavClasses: '',
+		sidebarLinks: [],
 		title: 'Rarely updated' 
 	};
 
@@ -86,8 +88,14 @@ var Posts = function() {
 	this.post = function(req, res) {
 
 		getPostViewModel(req, function(post) {
-			res.render('post', { title: post.title, post: post, homeNavClasses: '', aboutNavClasses: '' });
+			res.render('post', { title: post.title, post: post, homeNavClasses: '', aboutNavClasses: '', twitterNavClasses: '' });
 		});
+	};
+
+	this.twitter = function(req, res) {
+
+		res.render('twitter', { title: 'Twitter', homeNavClasses: '', aboutNavClasses: '', twitterNavClasses: 'active' });
+
 	};
 };
 

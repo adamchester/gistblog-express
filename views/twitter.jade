@@ -1,0 +1,7 @@
+extends layout
+include mixins/twitter_button
+block content
+	mixin twitter_button('adamchester')
+	script(charset='utf-8', src='http://widgets.twimg.com/j/2/widget.js')
+	script
+		new TWTR.Widget({version: 2, type: 'profile', rpp: 10, interval: 30000, width: 'auto', height: 400, theme: {shell: {background: '#333333', color: '#ffffff'}, tweets: {background: '#000000', color: '#ffffff', links: '#4aed05'} }, features: {scrollbar: false, loop: true, live: true, behavior: 'default'} }).render().setUser('adamchester').start();

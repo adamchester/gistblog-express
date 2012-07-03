@@ -5,11 +5,7 @@ html
 
 		meta(name='description', content='A blog that may be updated, rarely.')
 		meta(name='author', content='Adam Chester')
-		meta(name='viewport', content='width=device-width')
-
-		script(type='text/javascript', src='/javascripts/jquery.min.js')
-		script(type='text/javascript', src='/javascripts/bootstrap.min.js')
-		script(type='text/javascript', src='/javascripts/jquery.min.js')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
@@ -32,10 +28,13 @@ html
 						ul(class='nav')
 							li(class=homeNavClasses): a(href='/') Home
 							li(class=aboutNavClasses): a(href='/about') About
-							li: a(href='http://twitter.com/adamchester') twitter
+							li(class=twitterNavClasses): a(href='/twitter') twitter
 							li: a(href='http://github.com/adamchester') github
 
 		div(class='container')
 			block content
 
-		script(src='/javascripts/underscore-min.js')
+		script(type='text/javascript', src='/javascripts/underscore-min.js')
+		script(type='text/javascript', src='/javascripts/jquery.min.js')
+		script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+		script(type='text/javascript', src='/javascripts/jquery.min.js')

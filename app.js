@@ -31,6 +31,7 @@ app.configure('development', function(){
 app.get('/', routes.Posts.index);
 app.get('/posts/:id', routes.Posts.post);
 app.get('/about', routes.About.index);
+app.get('/twitter', routes.Posts.twitter);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

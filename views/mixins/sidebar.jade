@@ -1,0 +1,9 @@
+
+include twitter_button
+
+mixin sidebar(links)
+  div(class='well sidebar-nav')
+    ul(class='nav nav-list')
+      mixin twitter_button('adamchester')
+      each link in links
+        li: a(href=link.href)= link.text

@@ -1,7 +1,7 @@
 
 include twitter_share_post
 
-mixin post_full(post)
+mixin post_no_content(post)
 	div(class='well')
 		h1: a(href=post.url)= post.title
 		p
@@ -22,6 +22,3 @@ mixin post_full(post)
 			&nbsp;
 			span
 				mixin twitter_share_post(post)
-
-		p(class='blog-post')
-			!{post.content_html}

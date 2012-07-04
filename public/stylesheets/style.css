@@ -4,6 +4,11 @@ body {
   background: url('../images/whitey.png');
 }
 
+.nav-list {
+  padding-left: 4px !important;
+  padding-right: 4px !important;
+}
+
 .well {
   border: 1px solid #D2d2d2 !important;
   padding: 10px !important;

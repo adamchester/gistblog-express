@@ -1,3 +1,6 @@
+
+include mixins/sidebar
+
 doctype 5
 html
 	head
@@ -16,25 +19,26 @@ html
 		link(rel='apple-touch-icon', sizes='72x72', href='images/apple-touch-icon-72x72.png')
 		link(rel='apple-touch-icon', sizes='114x114', href='images/apple-touch-icon-114x114.png')
 
-	body
-		div(class='navbar navbar-fixed-top')
-			div(class='navbar-inner')
-				div(class='container')
-					a(class='btn btn-navbar', data-toggle='collapse', data-target='.nav-collapse')
-						span(class='i-bar') 
-							i(class='icon-chevron-down icon-white')
-					a(class='brand', href='/') Rarely updated
-					div(class='nav-collapse')
-						ul(class='nav')
-							li(class=homeNavClasses): a(href='/') Home
-							li(class=aboutNavClasses): a(href='/about') About
-							li(class=twitterNavClasses): a(href='/twitter') twitter
-							li: a(href='http://github.com/adamchester') github
-
-		div(class='container')
-			block content
-
 		script(type='text/javascript', src='/javascripts/underscore-min.js')
 		script(type='text/javascript', src='/javascripts/jquery.min.js')
 		script(type='text/javascript', src='/javascripts/bootstrap.min.js')
 		script(type='text/javascript', src='/javascripts/jquery.min.js')
+
+	body
+		div.navbar.navbar-fixed-top: div.navbar-inner: div.container
+			a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
+				span.i-bar: i.icon-chevron-down.icon-white
+			a(class='brand', href='/') Rarely updated
+			div.nav-collapse: ul.nav
+				li(class=shared.homeNavClasses): a(href='/') Home
+				li(class=shared.aboutNavClasses): a(href='/about') About
+				li(class=shared.readingNavClasses): a(href='/reading') Reading
+				li(class=shared.twitterNavClasses): a(href='/twitter') Twitter
+				li: a(href='http://github.com/adamchester') Github
+		div(class='container-fluid')
+			div.row-fluid
+				div.span9
+					block content
+				div.span3
+					mixin sidebar(shared.sidebarLinks)
+

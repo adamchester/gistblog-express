@@ -5,8 +5,9 @@
 
 var express = require('express')
   , routes = { 
-      Posts: require('./routes/posts.js').Posts
-      , About: require('./routes/about.js').About 
+      Posts: require('./routes/posts').Posts
+      , About: require('./routes/about').About 
+      , Reading: require('./routes/reading').Reading
     }
   , http = require('http');
 
@@ -32,6 +33,7 @@ app.get('/', routes.Posts.index);
 app.get('/posts/:id', routes.Posts.post);
 app.get('/about', routes.About.index);
 app.get('/twitter', routes.Posts.twitter);
+app.get('/reading', routes.Reading.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

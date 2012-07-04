@@ -1,0 +1,34 @@
+
+
+mixin twitter_profile_widget(username, width, height)
+	if width == undefined
+		- width = '\'auto\'';
+	if height == undefined
+		- height = 400;
+
+	script(charset='utf-8', src='http://widgets.twimg.com/j/2/widget.js')
+	script
+		new TWTR.Widget(
+		{version: 2,
+		type: 'profile',
+		rpp: 10,
+		interval: 3000,
+		width: #{width},
+		height: #{height},
+		theme: {
+			shell: {
+				background: 'whiteSmoke'
+				, color: '#000000'}
+			, tweets: {
+				background: 'whiteSmoke'
+				, color: '#000000'
+				, links: '#08C'} }
+			, features: {
+				scrollbar: false
+				, loop: true
+				, live: true
+				, behavior: 'default'} }
+		)
+		.render()
+		.setUser('#{username}')
+		.start();

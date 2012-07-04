@@ -1,9 +1,16 @@
 
-include twitter_button
+include twitter_follow_button
+include twitter_profile_widget
 
 mixin sidebar(links)
-  div(class='well sidebar-nav')
-    ul(class='nav nav-list')
-      mixin twitter_button('adamchester')
-      each link in links
-        li: a(href=link.href)= link.text
+	//- div.well.sidebar-nav
+	//- 	ul.nav.nav-list
+	//- 		li.nav-header Navigation
+	//- 		each link in links
+	//- 			li: a(href=link.href)= link.text
+	div.well.sidebar-nav
+		section.sidebar-tweets
+			ul.nav.nav-list
+				li.nav-header Recent tweets
+				mixin twitter_follow_button('adamchester')
+				mixin twitter_profile_widget('adamchester')

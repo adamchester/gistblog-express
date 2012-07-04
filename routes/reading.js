@@ -1,19 +1,18 @@
 
 var s = require('../lib/shared');
 
-var About = (function About() {
-
+var Reading = (function Reading() {
 
 	function Constructor() {
 	}
 
 	/*
-	 * GET /about page.
+	 * GET /reading page.
 	 */
 	function index(req, res) {
-		res.render('about', { 
+		res.render('reading', { 
 			shared: s.getSharedViewModel(),
-			title: 'About rarely updated' 
+			title: 'Reading list' 
 		});
 	};
 
@@ -25,4 +24,4 @@ var About = (function About() {
 	return Constructor;
 })();
 
-exports.About = new About();
+exports.Reading = new Reading();

@@ -1,8 +1,7 @@
 extends layout
 
-include mixins/post_no_content
+include mixins/post_summary
 
 block content
-	p(id='post-list')
-		each post in posts
-			mixin post_no_content(post)
+	each post in posts
+		div.well: mixin post_summary(post, true)

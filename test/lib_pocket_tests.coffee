@@ -1,5 +1,4 @@
-
-p = new (require './lib_pocket').Pocket 'adamchester', 'ac0280', 'dkhp5F21AaKN3u4f1dg0G7eg60dDAbz7'
+# p = new (require './lib_pocket').Pocket '', '', ''
 
 assert = require 'assert'
 _ = require 'underscore'

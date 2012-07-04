@@ -17,13 +17,14 @@ var Posts = function() {
 	};
 
 	this.post = function(req, res) {
-		shared.getPostViewModel(req, function(post) {
-			res.render('post', { title: post.title, post: post, shared: shared.getSharedViewModel() });
+		var postId = req.params.id
+		shared.getPostViewModel(postId, function(viewModel) {
+			res.render('post', viewModel);
 		});
 	};
 
 	this.twitter = function(req, res) {
-		res.render('twitter', { title: 'Twitter', shared: shared.getSharedViewModel() });
+		res.render('twitter', { title: 'Twitter', shared: shared.getSharedViewModel('twitter') });
 	};
 };
 

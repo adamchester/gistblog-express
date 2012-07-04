@@ -12,7 +12,7 @@ var About = (function About() {
 	 */
 	function index(req, res) {
 		res.render('about', { 
-			shared: s.getSharedViewModel(),
+			shared: s.getSharedViewModel('about'),
 			title: 'About rarely updated' 
 		});
 	};

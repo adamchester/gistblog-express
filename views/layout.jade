@@ -1,5 +1,5 @@
-
 include mixins/sidebar
+include mixins/google_analytics
 
 doctype 5
 html
@@ -24,16 +24,17 @@ html
 		script(type='text/javascript', src='/javascripts/bootstrap.min.js')
 		script(type='text/javascript', src='/javascripts/jquery.min.js')
 
+		mixin google_analytics('UA-32541059-1')
 	body
 		div.navbar.navbar-fixed-top: div.navbar-inner: div.container
 			a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
 				span.i-bar: i.icon-chevron-down.icon-white
 			a(class='brand', href='/') Rarely updated
 			div.nav-collapse: ul.nav
-				li(class=shared.homeNavClasses): a(href='/') Home
-				li(class=shared.aboutNavClasses): a(href='/about') About
-				li(class=shared.readingNavClasses): a(href='/reading') Reading
-				li(class=shared.twitterNavClasses): a(href='/twitter') Twitter
+				li(class=shared.navClasses.home): a(href='/') Home
+				li(class=shared.navClasses.about): a(href='/about') About
+				li(class=shared.navClasses.reading): a(href='/reading') Reading
+				li(class=shared.navClasses.twitter): a(href='/twitter') Twitter
 				li: a(href='http://github.com/adamchester') Github
 		div(class='container-fluid')
 			div.row-fluid

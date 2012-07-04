@@ -10,9 +10,8 @@ var Reading = (function Reading() {
 	 * GET /reading page.
 	 */
 	function index(req, res) {
-		res.render('reading', { 
-			shared: s.getSharedViewModel(),
-			title: 'Reading list' 
+		s.getReadingListViewModel(function (model) {
+			res.render('reading', model);
 		});
 	};
 

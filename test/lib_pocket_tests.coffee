@@ -17,7 +17,7 @@ describe 'pocket', ->
 				, isRead: (pocketApiListItem.state is 1)
 			}
 
-		list = require './assets/reading_list_page1.json'
+		list = require './assets/reading_list.json'
 		items = _.chain(list.list).map(toReadingListItem).value()
 		# console.log(JSON.stringify(items))
 

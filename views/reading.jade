@@ -1,4 +1,27 @@
 extends layout
 
 block content
-	h1 reading list todo
+	h1= title
+	p
+		| These links are like bookmarks, saved by me as I'm reading the web, via 
+		a(href='http://getpocket.com') getpocket
+		| . Not everything I read is listed here. Typically I only save to Pocket when
+		| I am not able to read the article at the time I encountered it.
+	div.well
+		table.table.table-striped.table-bordered.table-condensed
+			thead: tr
+				th
+					i.icon-time
+					| Date Added
+				th
+					i.icon-bookmark
+					| Link
+				th
+					i.icon-tags
+					| Tags
+			tbody
+				each item in items
+					tr
+						td= item.time_added.toDateString()
+						td: a(href=item.url)= item.title 
+						td= item.tags.join(', ')

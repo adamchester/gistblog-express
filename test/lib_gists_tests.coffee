@@ -2,6 +2,7 @@ gists = require '../lib/gists.js'
 assert = require 'assert'
 th = require './test_helpers'
 
+
 describe 'gists', ->
 
 	describe 'module', ->
@@ -13,8 +14,10 @@ describe 'gists', ->
 		it 'should not export toBlogPost', -> assert gists.toBlogPost is undefined
 
 	describe 'method', ->
-		beforeEach -> th.mockGithubApis([2944558, 2861047], 9999999999)
-		afterEach -> th.cleanUpMockGithubApis()
+
+		githubApiScopes = null
+		beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
+		afterEach -> githubApiScopes.done()
 
 		describe '#getGistMarkdown()', ->
 

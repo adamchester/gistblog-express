@@ -15,8 +15,10 @@ describe 'shared', ->
 	describe 'method', ->
 
 		describe '#getPostViewModel()', ->
-			beforeEach -> th.mockGithubApis()
-			afterEach -> th.cleanUpMockGithubApis()
+
+			githubApiScopes = null
+			beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
+			afterEach -> githubApiScopes.done()
 
 			it 'should include the shared view model', (done) ->
 				s.getPostViewModel 2944558, (model) -> th.assertCallbackSuccess model, undefined, done, ->
@@ -42,8 +44,10 @@ describe 'shared', ->
 
 
 		describe '#getIndexViewModel()', ->
-			beforeEach -> th.mockGithubApis()
-			afterEach -> th.cleanUpMockGithubApis()
+
+			githubApiScopes = null
+			beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
+			afterEach -> githubApiScopes.done()
 
 			it 'should execute the callback without error', (done) ->
 				s.getIndexViewModel (model) -> th.assertCallbackSuccess model, undefined, done

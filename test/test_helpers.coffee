@@ -4,15 +4,15 @@ assert = require 'assert'
 _ = require 'underscore'
 
 # use the nock library to capture requests to the github API
-module.exports.mockGithubApis = mockGithubApis = (validGistsIds, invalidGistsId) ->
+mockGithubApis = (validGistIds, invalidGistId) ->
 
-	if validGistsIds is undefined then validGistsIds = [2944558, 2861047]
-	if invalidGistsId is undefined then invalidGistsId = 9999999999
+	if validGistIds is undefined then validGistIds = [2944558, 2861047]
+	if invalidGistId is undefined then invalidGistId = 9999999999
 
-	githubApi = nock('https://api.github.com/') #.log(console.log)
-	githubRaw = nock('https://gist.github.com/') #.log(console.log)
+	githubApi = new nock('https://api.github.com/')#.log(console.log)
+	githubRaw = new nock('https://gist.github.com/')#.log(console.log)
 
-	for validGistsId in validGistsIds
+	for validGistsId in validGistIds
 		gistJsonPath = __dirname + "/assets/gists_#{validGistsId}.json"
 		gistData = require(gistJsonPath);
 		githubApi.get("/gists/#{validGistsId}").reply(200, gistData)
@@ -22,14 +22,20 @@ module.exports.mockGithubApis = mockGithubApis = (validGistsIds, invalidGistsId)
 		rawUrl = gistData.files[_(gistData.files).keys()[0]].raw_url;
 		githubRaw.get(rawUrl.replace('https://gist.github.com', '')).replyWithFile(200, __dirname + "/assets/raw_#{validGistsId}.md")
 
-	githubApi.get("/gists/#{invalidGistsId}").reply(404, 'not found') if invalidGistsId isnt undefined
+	githubApi.get("/gists/#{invalidGistId}").reply(404, 'not found') if invalidGistId isnt undefined
 	githubApi.get('/users/invalid/gists').reply(404, 'not found')
 	githubApi.get('/users/adamchester/gists').replyWithFile(200, __dirname + '/assets/users_adamchester_gists.json')
-	return
 
-module.exports.cleanUpMockGithubApis = cleanUpMockGithubApis = () ->
-	nock.cleanAll()
+	# return our nock scopes, so the caller call done() if necessary
+	githubScopes = [githubApi, githubRaw]
+	return {
+		scopes: githubScopes
+		done: () ->
+			nock = nock.cleanAll()
+			# scope.done() for scope in githubScopes
+	}
 
+module.exports.mockGithubApis = mockGithubApis
 
 # some simple assert helpers
 module.exports.assertCallbackSuccess = assertCallbackSuccess = (result, error, done, additional) ->

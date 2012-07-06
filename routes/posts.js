@@ -3,9 +3,7 @@
  * GET home page.
  */
 
-var gists = require('../lib/gists')
-	, _ = require('underscore')
-	, shared = require('../lib/shared')
+var shared = require('../lib/shared')
 ;
 
 var Posts = function() {

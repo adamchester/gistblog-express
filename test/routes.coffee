@@ -9,6 +9,10 @@ routes =
 
 describe 'routes', ->
 
+	githubApiScopes = null
+	beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
+	afterEach -> githubApiScopes.done()
+
 	describe 'About', ->
 		it 'should export About', -> assert routes.About isnt undefined
 		it 'should export About.index', -> 	assert routes.About.index isnt undefined

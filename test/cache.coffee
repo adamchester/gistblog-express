@@ -5,45 +5,71 @@ assert = require 'assert'
 cache = require '../lib/cache'
 
 describe 'cache', ->
-	describe 'AsyncMethod', ->
 
-		it 'should execute the callback', (done) ->
-			wasMockMethodCalled = false
-			methodToCache = (opt, cb) -> wasMockMethodCalled = true; cb()
-			target = new cache.AsyncMethod({method: methodToCache, args: {}})
-			target.execute {}, (value, error) -> assert wasMockMethodCalled; done()
-			
-		it 'should call the method with the correct arguments', (done) ->
-			wasMockMethodCalled = false
-			expectedArgs = id: 1, name:'one'
-			methodToCache = (opt, cb) -> wasMockMethodCalled = true; assert.deepEqual(expectedArgs, opt); cb()
-			target = new cache.AsyncMethod({method: methodToCache, args: expectedArgs})
-			target.execute {}, (value, error) -> assert wasMockMethodCalled; done()
+	describe 'wrap', ->
 
-		it 'should return the cached result on the 2nd execution', (done) ->
+		it 'should execute the cached method', (done) ->
+			methodToCache = (opt, cb) -> cb() # just call back
+			cachedMethod = cache.wrap(methodToCache)
+			cachedMethod (error, value) -> assert.ifError(error); done()
+
+		it 'should execute the callback with an error when the initial caching gives an error', ->
+			expectedError = new Error('test error')
+			methodToCache = (opt, cb) -> cb(expectedError)
+			cachedMethod = cache.wrap(methodToCache)
+			cachedMethod (error, value) ->
+				assert value is undefined, 'should recieve \'undefined\' for value when initial cache update results in an error'
+				assert error, 'the error should be truthy'
+				assert.equal expectedError, error, 'got an unexpected error'
+
+		it 'should call the cached method with the correct arguments', (done) ->
 			callbackCount = 0
-			expectedArgs = id: 1, name:'one'
-			methodToCache = (opt, cb) -> callbackCount++; cb()
-			target = new cache.AsyncMethod({method: methodToCache, args: expectedArgs})
+			expectedArgs = id: 1, name:'one', created: new Date(), sub: { sub1: 1, sub2: 2}
+			methodToCache = (opt, cb) -> callbackCount++; assert.deepEqual(expectedArgs, opt); cb(null)
 
-			target.execute {call:1}, (value, error) -> 
-				target.execute {call:2}, (value, error) -> 
-					assert callbackCount == 1, 'callback count should be 1 (methodToCache should not have been executed twice)'
+			cachedMethod = cache.wrap methodToCache, { args: expectedArgs }
+			cachedMethod (error, value) -> assert.equal(callbackCount, 1); done()
+
+		it 'should return the cached result, without calling the wrapped method, on the 2nd execution', (done) ->
+			expectedCallbackCount = 1
+			actualCallbackCount = 0
+
+			methodToCache = (opt, cb) -> cb(null, { count: ++actualCallbackCount }) # inc call count, return it as the cached value
+			cachedMethod = cache.wrap(methodToCache)	
+			cachedMethod (error, value) -> #first call
+				assert.equal(value.count, actualCallbackCount)
+				assert.equal(actualCallbackCount, expectedCallbackCount)
+				cachedMethod (error, value) -> #second call
+					assert.equal(value.count, actualCallbackCount)
+					assert.equal(actualCallbackCount, expectedCallbackCount)
 					done()
 
-	# it 'should call the method on the first call to execute', (done) ->
-	# 	wasMockMethodCalled = false
-	# 	mockAsyncMethodResult = {myField: 1}
-	# 	mockAsyncMethodArgs = {id: 1}
-	# 	mockAsyncMethod = (options, callback) -> 
-	# 		wasMockMethodCalled = true
-	# 		assert options is mockAsyncMethodArgs
-	# 		callback(mockAsyncMethodResult)
-		
-	# 	cachedMethod = new cache.CachedMethod(mockAsyncMethodArgs, mockAsyncMethod)
+		it 'should return the initialCachedValue without blocking when initialCachedValue is non-null', (done) ->
+			callbackCount = 0
+			seed = { initial: true }
+			methodToCache = (opt, cb) -> cb(null, { initial: opt.initial, count: ++callbackCount })
+			cachedMethod = cache.wrap(methodToCache, { initialCachedValue: seed })
 
-	# 	cachedMethod.execute {opt:1}, (value, error) ->
-	# 		assert value is mockAsyncMethodResult, 'expected execute to return the correct result'
-	# 		assert error is undefined, 'expected the error to be undefined'
-	# 		assert wasMockMethodCalled, 'expected the mock method to be called'
-	# 		done()
+			cachedMethod (err, value) ->
+				assert.equal(callbackCount, 0, 'expected the cached method not to have been called yet')
+				assert.deepEqual(seed, value, 'expected the first returned value to be the initial seed')
+				done()
+
+		it 'should allow multiple calls, all of which should block until the initial cache update', (done) ->
+			# should allow multiple calls, all of which should block until the initial cache update
+			done()
+
+		it 'should not call the cached method more than once at a time before the initial cache update', (done) ->
+			# TODO: should not call the cached method more than once at a time
+			done()
+
+		it 'should not call the cached method more than once at a time after initial cache update', (done) ->
+			# TODO: should not call the cached method more than once at a time
+			done()
+
+		it 'should update the cached value after the specified # of minutes', (done) ->
+			# methodToCache = (opt, cb) -> cb(null, { initial: opt.initial, count: ++callbackCount })
+			# cachedMethod = cache.wrap methodToCache, { expiryMinutes: 0.01 }
+			# TODO: should update the cached value after the specified # of minutes
+			done()
+

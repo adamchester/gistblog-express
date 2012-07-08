@@ -6,7 +6,7 @@ var Reading = (function Reading() {
 
 	function index(req, res) {
 		s.getReadingListViewModel(function(error, model) {
-			// TODO: handle error?
+			if (error) throw error;
 			res.render('reading', model);
 		});
 	}

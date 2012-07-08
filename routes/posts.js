@@ -10,7 +10,7 @@ var Posts = function() {
 
 	this.index = function(req, res) {
 		shared.getIndexViewModel(function(error, viewModel) {
-			// TODO: handle error ?
+			if (error) throw error;
 			res.render('index', viewModel);
 		});
 	};
@@ -18,7 +18,7 @@ var Posts = function() {
 	this.post = function(req, res) {
 		var postId = req.params.id;
 		shared.getPostViewModel(postId, function(error, viewModel) {
-			// TODO: handle error ?
+			if (error) throw error;
 			res.render('post', viewModel);
 		});
 	};

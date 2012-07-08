@@ -3,5 +3,5 @@
 --watch
 --reporter list
 --ui bdd
---growl
 --timeout 6000
+--bail

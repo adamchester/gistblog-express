@@ -3,13 +3,13 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = { 
-      Posts: require('./routes/posts').Posts
-      , About: require('./routes/about').About 
-      , Reading: require('./routes/reading').Reading
-    }
-  , http = require('http');
+var express = require('express'),
+  routes = {
+    Posts: require('./routes/posts').Posts,
+    About: require('./routes/about').About,
+    Reading: require('./routes/reading').Reading
+  },
+  http = require('http');
 
 var app = express();
 
@@ -26,7 +26,7 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler());
+  app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
 });
 
 app.get('/', routes.Posts.index);

@@ -39,8 +39,8 @@ module.exports.mockGithubApis = mockGithubApis
 
 # some simple assert helpers
 module.exports.assertCallbackSuccess = assertCallbackSuccess = (result, error, done, additional) ->
-	assert result isnt null
-	assert error is undefined
+	assert result
+	assert !error
 	if additional then additional()
 	done()
 
@@ -50,16 +50,15 @@ module.exports.assertCallbackResRender = assertCallbackResRender = (routeMethod,
 	res = 
 		render: (name, model) ->
 			assert name is expectedTemplateName, "expected #{routeMethod} to call res.render with #{expectedTemplateName} as the first param"
-			assert model isnt undefined
+			assert model
 			done()
 	# call the function 
 	routeMethod(req, res)
 
-
 module.exports.assertCallbackError = assertCallbackError = (result, error, done, additional) ->
 	# console.log "#{result}, #{error}"
-	assert result is null
-	assert error isnt null
+	assert !result
+	assert error
 	if additional then additional()
 	done()
 
@@ -68,4 +67,4 @@ module.exports.assertHasFields = assertHasFields = (object, fields) ->
 	# console.log JSON.stringify(object)
 	for field in fields
 		fieldValue = object[field]
-		assert fieldValue isnt undefined, "expected a field named '#{field}' on: #{JSON.stringify(object)}"
+		assert fieldValue || fieldValue == 0, "expected a field named '#{field}' on: #{JSON.stringify(object)}"

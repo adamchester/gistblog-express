@@ -18,10 +18,10 @@ describe 'reading list', ->
 		describe '#getReadingList()', ->
 
 			it 'should make the callback', (done) ->
-				rl.getReadingList (list) -> th.assertCallbackSuccess list, undefined, done
+				rl.getReadingList (error, list) -> th.assertCallbackSuccess list, error, done
 
 			it 'should return a list of objects with [title, url, tags, time_added]', (done) ->
-				rl.getReadingList (list) -> th.assertCallbackSuccess list, undefined, done, ->
+				rl.getReadingList (error, list) -> th.assertCallbackSuccess list, error, done, ->
 					th.assertHasFields item, ['title', 'url', 'tags', 'time_added'] for item in list
 
 

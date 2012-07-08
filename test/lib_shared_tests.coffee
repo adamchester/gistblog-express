@@ -1,11 +1,15 @@
-
-assert = require 'assert'
-s = require '../lib/shared'
-th = require './test_helpers'
-
-expectedSharedViewModelFields = ['navClasses', 'sidebarLinks']
-
 describe 'shared', ->
+
+	assert = require 'assert'
+	s = require '../lib/shared'
+	th = require './test_helpers'
+
+	expectedSharedViewModelFields = ['topLevelMenuItems']
+	expectedTopLevelMenuItemFields = ['href', 'text', 'classes']
+	validPostId1 = 2944558
+	validPostId2 = 2861047
+	invalidPostId = 9999999999
+
 	describe 'module', ->
 		it 'should export getSharedViewModel', -> assert s.getSharedViewModel isnt undefined
 		it 'should export getIndexViewModel', -> assert s.getIndexViewModel isnt undefined
@@ -15,17 +19,17 @@ describe 'shared', ->
 	describe 'method', ->
 
 		githubApiScopes = null
-		beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
+		beforeEach -> githubApiScopes = th.mockGithubApis([validPostId1, validPostId2], invalidPostId)
 		afterEach -> githubApiScopes.done()
 
 		describe '#getPostViewModel()', ->
 
 			it 'should include the shared view model', (done) ->
-				s.getPostViewModel 2944558, (err, model) -> th.assertCallbackSuccess model, err, done, ->
+				s.getPostViewModel validPostId1, (err, model) -> th.assertCallbackSuccess model, err, done, ->
 					assert model.shared isnt undefined
 
 			it 'should work with a string postId', (done) ->
-				s.getPostViewModel "2944558", (err, model) -> th.assertCallbackSuccess model, err, done, ->
+				s.getPostViewModel "#{validPostId1}", (err, model) -> th.assertCallbackSuccess model, err, done, ->
 					assert model.shared isnt undefined and model.shared isnt null
 					assert model.item isnt null
 
@@ -44,7 +48,9 @@ describe 'shared', ->
 
 		describe '#getSharedViewModel()', ->
 			it 'should return an object with [navClasses, sidebarLinks]', ->
-				th.assertHasFields s.getSharedViewModel(), expectedSharedViewModelFields
+				model = s.getSharedViewModel()
+				th.assertHasFields model, expectedSharedViewModelFields
+				th.assertHasFields item, expectedTopLevelMenuItemFields for item in model.topLevelMenuItems
 
 		describe '#getIndexViewModel()', ->
 

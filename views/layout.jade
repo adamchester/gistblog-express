@@ -13,16 +13,11 @@ html
 		link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
 		link(rel='stylesheet', href='/stylesheets/bootstrap.responsive.min.css')
-		
+
 		link(rel='shortcut icon', href='/favicon.ico')
 		link(rel='apple-touch-icon', href='images/apple-touch-icon.png')
 		link(rel='apple-touch-icon', sizes='72x72', href='images/apple-touch-icon-72x72.png')
 		link(rel='apple-touch-icon', sizes='114x114', href='images/apple-touch-icon-114x114.png')
-
-		script(type='text/javascript', src='/javascripts/underscore-min.js')
-		script(type='text/javascript', src='/javascripts/jquery.min.js')
-		script(type='text/javascript', src='/javascripts/bootstrap.min.js')
-		script(type='text/javascript', src='/javascripts/jquery.min.js')
 
 		mixin google_analytics
 	body
@@ -31,15 +26,18 @@ html
 				span.i-bar: i.icon-chevron-down.icon-white
 			a(class='brand', href='/') Rarely updated
 			div.nav-collapse: ul.nav
-				li(class=shared.navClasses.home): a(href='/') Home
-				li(class=shared.navClasses.about): a(href='/about') About
-				li(class=shared.navClasses.reading): a(href='/reading') Reading
-				li(class=shared.navClasses.twitter): a(href='/twitter') Twitter
-				li: a(href='http://github.com/adamchester') Github
+				each link in shared.topLevelMenuItems
+					li(class=link.classes): a(href=link.href)= link.text
+
 		div(class='container-fluid')
 			div.row-fluid
 				div.span9
 					block content
 				div.span3
-					mixin sidebar(shared.sidebarLinks)
+					mixin sidebar(shared.topLevelMenuItems)
+
+		script(type='text/javascript', src='/javascripts/underscore-min.js')
+		script(type='text/javascript', src='/javascripts/jquery.min.js')
+		script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+		script(type='text/javascript', src='/javascripts/jquery.min.js')
 

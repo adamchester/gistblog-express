@@ -67,4 +67,4 @@ module.exports.assertHasFields = assertHasFields = (object, fields) ->
 	# console.log JSON.stringify(object)
 	for field in fields
 		fieldValue = object[field]
-		assert fieldValue || fieldValue == 0, "expected a field named '#{field}' on: #{JSON.stringify(object)}"
+		assert fieldValue || fieldValue == 0 || fieldValue == '', "expected a field named '#{field}' on: #{JSON.stringify(object)}"

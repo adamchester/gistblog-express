@@ -14,46 +14,45 @@ describe 'shared', ->
 
 	describe 'method', ->
 
+		githubApiScopes = null
+		beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
+		afterEach -> githubApiScopes.done()
+
 		describe '#getPostViewModel()', ->
 
-			githubApiScopes = null
-			beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
-			afterEach -> githubApiScopes.done()
-
 			it 'should include the shared view model', (done) ->
-				s.getPostViewModel 2944558, (model) -> th.assertCallbackSuccess model, undefined, done, ->
+				s.getPostViewModel 2944558, (err, model) -> th.assertCallbackSuccess model, err, done, ->
 					assert model.shared isnt undefined
+
+			it 'should work with a string postId', (done) ->
+				s.getPostViewModel "2944558", (err, model) -> th.assertCallbackSuccess model, err, done, ->
+					assert model.shared isnt undefined and model.shared isnt null
+					assert model.item isnt null
 
 		describe '#getReadingListViewModel()', ->			
 			it 'should make the callback', (done) ->
-				s.getReadingListViewModel (model) -> th.assertCallbackSuccess model, undefined, done
+				s.getReadingListViewModel (err, model) -> th.assertCallbackSuccess model, err, done
 
 			it 'should include the view model items (e.g. shared, items)', (done) -> 
-				s.getReadingListViewModel (model) -> th.assertCallbackSuccess model, undefined, done, ->
+				s.getReadingListViewModel (err, model) -> th.assertCallbackSuccess model, err, done, ->
 					assert model.shared isnt undefined
 					assert model.items isnt undefined
 					assert model.items.length > 0, 'expected items to be an array/list with at least one item'
 
 			it 'should include list in the view model', (done) ->
-				s.getReadingListViewModel (model) -> th.assertCallbackSuccess model, undefined, done, ->
-
+				s.getReadingListViewModel (err, model) -> th.assertCallbackSuccess model, err, done, ->
 
 		describe '#getSharedViewModel()', ->
 			it 'should return an object with [navClasses, sidebarLinks]', ->
 				th.assertHasFields s.getSharedViewModel(), expectedSharedViewModelFields
 
-
 		describe '#getIndexViewModel()', ->
 
-			githubApiScopes = null
-			beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
-			afterEach -> githubApiScopes.done()
-
 			it 'should execute the callback without error', (done) ->
-				s.getIndexViewModel (model) -> th.assertCallbackSuccess model, undefined, done
+				s.getIndexViewModel (err, model) -> th.assertCallbackSuccess model, err, done
 
 			it 'should include the shared view model', (done) ->
-				s.getIndexViewModel (model) -> th.assertCallbackSuccess model, undefined, done, ->
+				s.getIndexViewModel (err, model) -> th.assertCallbackSuccess model, err, done, ->
 					assert model.shared isnt undefined
 
 

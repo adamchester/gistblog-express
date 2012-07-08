@@ -9,14 +9,16 @@ var shared = require('../lib/shared')
 var Posts = function() {
 
 	this.index = function(req, res) {
-		shared.getIndexViewModel(function(viewModel) {
+		shared.getIndexViewModel(function(error, viewModel) {
+			// TODO: handle error ?
 			res.render('index', viewModel);
 		});
 	};
 
 	this.post = function(req, res) {
-		var postId = req.params.id
-		shared.getPostViewModel(postId, function(viewModel) {
+		var postId = req.params.id;
+		shared.getPostViewModel(postId, function(error, viewModel) {
+			// TODO: handle error ?
 			res.render('post', viewModel);
 		});
 	};
@@ -26,4 +28,4 @@ var Posts = function() {
 	};
 };
 
-exports.Posts = new Posts;
+exports.Posts = new Posts();

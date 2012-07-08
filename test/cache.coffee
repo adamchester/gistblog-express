@@ -6,16 +6,17 @@ cache = require '../lib/cache'
 
 describe 'cache', ->
 	describe 'AsyncMethod', ->
+
 		it 'should execute the callback', (done) ->
 			wasMockMethodCalled = false
 			methodToCache = (opt, cb) -> wasMockMethodCalled = true; cb()
 			target = new cache.AsyncMethod({method: methodToCache, args: {}})
 			target.execute {}, (value, error) -> assert wasMockMethodCalled; done()
-
+			
 		it 'should call the method with the correct arguments', (done) ->
 			wasMockMethodCalled = false
 			expectedArgs = id: 1, name:'one'
-			methodToCache = (opt, cb) -> wasMockMethodCalled = true; assert opt is expectedArgs; cb()
+			methodToCache = (opt, cb) -> wasMockMethodCalled = true; assert.deepEqual(expectedArgs, opt); cb()
 			target = new cache.AsyncMethod({method: methodToCache, args: expectedArgs})
 			target.execute {}, (value, error) -> assert wasMockMethodCalled; done()
 

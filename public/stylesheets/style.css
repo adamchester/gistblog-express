@@ -1,30 +1,29 @@
 body {
-  position: relative;
-  padding-top: 60px;
-  background: url(../images/whitey.png);
+	position: relative;
+	padding-top: 60px;
+	background: url(../images/whitey.png);
 }
 
 .nav-list {
-  padding-left: 3px !important;
-  padding-right: 1px !important;
+	padding-left: 3px !important;
+	padding-right: 1px !important;
 }
 
 .sidebar-tweets {
-  height: 580px;
+	height: 580px;
 }
 
 .sidebar-nav {
-  padding-left: 11px !important;
+	padding-left: 11px !important;
 }
 
 .well {
-
-  -moz-box-shadow: -2px -2px 2px 2px #888;
-  -webkit-box-shadow: -2px -2px 2px 2px#888;
-  box-shadow: -2px -2px 2px 2px #888;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 0 0 5px #888;
 }
 
 .navbar-fixed-top {
-  box-shadow: 0px 0px 3px #000;
-  border-bottom: 1px solid #999;
+	box-shadow: 0px 0px 3px #000;
+	border-bottom: 1px solid #999;
 }

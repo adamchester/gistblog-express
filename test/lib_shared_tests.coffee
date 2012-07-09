@@ -47,10 +47,10 @@ describe 'shared', ->
 				s.getReadingListViewModel (err, model) -> th.assertCallbackSuccess model, err, done, ->
 
 		describe '#getSharedViewModel()', ->
-			it 'should return an object with [navClasses, sidebarLinks]', ->
-				model = s.getSharedViewModel()
-				th.assertHasFields model, expectedSharedViewModelFields
-				th.assertHasFields item, expectedTopLevelMenuItemFields for item in model.topLevelMenuItems
+			it 'should return an object with [navClasses, sidebarLinks]', (done) ->
+				s.getSharedViewModel 'index', (err, model) -> th.assertCallbackSuccess model, err, done, ->
+					th.assertHasFields model, expectedSharedViewModelFields
+					th.assertHasFields item, expectedTopLevelMenuItemFields for item in model.topLevelMenuItems
 
 		describe '#getIndexViewModel()', ->
 

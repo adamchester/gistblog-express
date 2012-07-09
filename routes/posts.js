@@ -24,7 +24,9 @@ var Posts = function() {
 	};
 
 	this.twitter = function(req, res) {
-		res.render('twitter', { title: 'Twitter', shared: shared.getSharedViewModel('twitter') });
+		shared.getSharedViewModel('twitter', function gotSharedViewModel(error, model) {
+			res.render('twitter', { title: 'Twitter', shared: model });
+		});
 	};
 };
 

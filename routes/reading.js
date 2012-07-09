@@ -11,7 +11,19 @@ var Reading = (function Reading() {
 		});
 	}
 
+	function tag(req, res) {
+
+		console.log('in tag with id = ' + req.params.tagName);
+
+		var tagName = req.params.tagName;
+		s.getReadingTagViewModel(tagName, function gotTagViewModel(error, model) {
+			if (error) throw error;
+			res.render('reading_tag', model);
+		});
+	}
+
 	Constructor.prototype = {
+		tag: tag,
 		index: index
 	};
 

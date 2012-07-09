@@ -1,13 +1,20 @@
 
 include twitter_follow_button
 include twitter_profile_widget
+include tag_list
 
-mixin sidebar(links)
+mixin sidebar(links, tags)
+	//- div.well.sidebar-nav
+	//- 	ul.nav.nav-list
+	//- 		li.nav-header Navigation
+	//- 		each link in links
+	//- 			li(class=link.classes): a(href=link.href)= link.text
 	div.well.sidebar-nav
 		ul.nav.nav-list
-			li.nav-header Navigation
-			each link in links
-				li(class=link.classes): a(href=link.href)= link.text
+			li.nav-header Reading List Tags
+			li
+				mixin tag_list(tags)
+
 	div.well.sidebar-nav
 		section.sidebar-tweets
 			ul.nav.nav-list

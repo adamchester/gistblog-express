@@ -3,10 +3,9 @@ extends layout
 block content
 	h1= title
 	p
-		| These links are like bookmarks, saved by me as I'm reading the web, via 
-		a(href='http://getpocket.com') getpocket
-		| . Not everything I read is listed here. Typically I only save to Pocket when
-		| I am not able to read the article at the time I encountered it.
+		| This page is a list of links / pages that I have tagged with the tag '
+		=tag.name
+		|'.
 	table.table.table-striped.table-bordered.table-condensed
 		thead: tr
 			th Date Added

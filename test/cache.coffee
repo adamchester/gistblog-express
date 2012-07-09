@@ -7,15 +7,28 @@ describe 'cache', ->
 
 	describe 'cachify', ->
 
-		it 'should execute the cached method', (done) ->
+		it 'should throw an error if no args were passed in but the method requires args', (done) ->
+			# todo
+			done()
+
+		it 'should throw an error if args were passed in but the method requires no args', (done) ->
+			# todo
+			done()
+
+		it 'should execute the cached method with arguments', (done) ->
 			methodToCache = (opt, cb) -> cb() # just call back
-			cachedMethod = cache.cachify(methodToCache)
+			cachedMethod = cache.cachify(methodToCache, { args: {}, updateCacheOnCreation: true })
+			cachedMethod.get (error, value) -> assert.ifError(error); done()
+
+		it 'should execute the cached method with no arguments', (done) ->
+			methodToCache = (cb) -> cb() # just call back
+			cachedMethod = cache.cachify(methodToCache, { updateCacheOnCreation: true })
 			cachedMethod.get (error, value) -> assert.ifError(error); done()
 
 	describe 'get', ->
 		it 'should execute the callback with an error when the initial caching gives an error', ->
 			expectedError = new Error('test error')
-			methodToCache = (opt, cb) -> cb(expectedError)
+			methodToCache = (cb) -> cb(expectedError)
 			cachedMethod = cache.cachify(methodToCache)
 			cachedMethod.get (error, value) ->
 				assert value is undefined, 'should recieve \'undefined\' for value when initial cache update results in an error'
@@ -30,11 +43,11 @@ describe 'cache', ->
 			cachedMethod = cache.cachify methodToCache, { args: expectedArgs, updateCacheOnCreation: false }
 			cachedMethod.get (error, value) -> assert.equal(callbackCount, 1); done()
 
-		it 'should return the cached result, without calling the cachifyped method, on the 2nd execution', (done) ->
+		it 'should return the previously cached result on the 2nd execution', (done) ->
 			expectedCallbackCount = 1
 			actualCallbackCount = 0
 
-			methodToCache = (opt, cb) -> cb(null, { count: ++actualCallbackCount }) # inc call count, return it as the cached value
+			methodToCache = (cb) -> cb(null, { count: ++actualCallbackCount }) # inc call count, return it as the cached value
 			cachedMethod = cache.cachify(methodToCache)	
 			cachedMethod.get (error, value) -> #first call
 				assert.equal(value.count, actualCallbackCount)
@@ -47,7 +60,7 @@ describe 'cache', ->
 		it 'should return the initialCachedValue without blocking when initialCachedValue is non-null', (done) ->
 			callbackCount = 0
 			seed = { initial: true }
-			methodToCache = (opt, cb) -> cb(null, { initial: opt.initial, count: ++callbackCount })
+			methodToCache = (cb) -> cb(null, { initial: opt.initial, count: ++callbackCount })
 			cachedMethod = cache.cachify(methodToCache, { initialCachedValue: seed })
 
 			cachedMethod.get (err, value) ->

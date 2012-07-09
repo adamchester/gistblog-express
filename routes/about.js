@@ -8,18 +8,20 @@ var About = (function About() {
 	}
 
 	/*
-	 * GET /about page.
-	 */
+	* GET /about page.
+	*/
 	function index(req, res) {
-		res.render('about', { 
-			shared: s.getSharedViewModel('about'),
-			title: 'About rarely updated' 
+
+		s.getSharedViewModel('about', function gotSharedViewModel(err, sharedModel) {
+			res.render('about', {
+				shared: sharedModel,
+				title: 'About rarely updated'
+			});
 		});
-	};
+	}
 
 	Constructor.prototype = {
 		index: index
-		,
 	};
 
 	return Constructor;

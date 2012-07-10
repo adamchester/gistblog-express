@@ -1,5 +1,5 @@
 
-mixin tag_list(tags)
+mixin reading_list_tag_list(tags)
 	p.tag-list
 		each tag in tags
 			a(href=tag.href, class=tag.classes)= tag.name

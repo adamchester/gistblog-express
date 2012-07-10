@@ -1,0 +1,23 @@
+
+include reading_list_tag
+
+mixin reading_list_table(items)
+	table.table.table-striped.table-bordered.table-condensed
+		thead: tr
+			th Date Added 
+				i.icon-time
+			th Link 
+				i.icon-bookmark
+			th Tags 
+				i.icon-tags
+		tbody
+			each item in items
+				tr
+					- var dteString = item.time_added.toDateString()
+					- dteString = dteString.substring(3, dteString.length)
+					td= dteString
+					td: a(href=item.url)= item.title 
+					td
+						each tag in item.tags
+							mixin reading_list_tag(tag)
+							| 

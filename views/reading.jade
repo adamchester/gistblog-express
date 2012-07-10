@@ -1,5 +1,7 @@
 extends layout
 
+include mixins/reading_list_table
+
 block content
 	h1= title
 	p
@@ -7,22 +9,5 @@ block content
 		a(href='http://getpocket.com') getpocket
 		| . Not everything I read is listed here. Typically I only save to Pocket when
 		| I am not able to read the article at the time I encountered it.
-	table.table.table-striped.table-bordered.table-condensed
-		thead: tr
-			th Date Added
-				i.icon-time
-			th Link
-				i.icon-bookmark
-			th Tags
-				i.icon-tags
-		tbody
-			each item in items
-				tr
-					td= item.time_added.toDateString()
-					td: a(href=item.url)= item.title 
-					td
-						each tag in item.tags
-							a(href='/reading/tags/' + tag, style='font-color: white;')
-								span.label.label-info
-									=tag
-							| 
+	div.well.reading-list-table
+		mixin reading_list_table(items)

@@ -1,3 +1,4 @@
+
 describe 'cache', ->
 
 	util = require 'util'
@@ -6,11 +7,47 @@ describe 'cache', ->
 	assert = require 'assert'
 	cache = require '../lib/cache'
 
+	# helpers
+	isFunction = (fn) -> _.isFunction(fn)
+	isObject = (obj) -> _.isObject(obj)
+	isNumber = (num) -> _.isNumber(num)
+	isBool = (bool) -> _.isBoolean(bool)
+
+	describe 'exports', ->
+		it 'should include itself', -> assert.ok cache
+		it 'should include getOptions (function)', -> assert isFunction(cache.getOptions)
+		it 'should include getOption (function)', -> assert isFunction(cache.getOption)
+		it 'should include setOption (function)', -> assert isFunction(cache.setOption)
+		it 'should include cachify (function)', -> assert isFunction(cache.cachify)
+
+	describe 'option', ->
+		describe 'getLogger', ->
+			it 'should get and set correctly', -> # todo
+			it 'should cause future cachified methods to use the configured logger', -> # todo
+
+		describe 'expiryMinutes', ->
+			it 'should get and set correctly', ->
+				oldExpiryMinutes = cache.getOption('expiryMinutes')
+				cache.setOption('expiryMinutes', oldExpiryMinutes + 1)
+				assert.equal cache.getOption('expiryMinutes'), oldExpiryMinutes + 1
+
+			it 'should cause future cachified methods to use the default, without affecting existing cachified methods', ->
+				originalExpiryMinutes = cache.getOption('expiryMinutes')
+				originalCachified = cache.cachify((cb) -> cb())
+				cache.setOption('expiryMinutes', originalExpiryMinutes + 1)
+
+				newCachified = cache.cachify((cb) -> cb())
+				assert.equal originalCachified.getOptions().expiryMinutes, originalExpiryMinutes
+				assert.equal newCachified.getOptions().expiryMinutes, originalExpiryMinutes + 1
+
 	describe 'cachify', ->
 
-		it 'should return the cached method, with public without error', (done) ->
+		it 'should have a valid cache name when no cache name provided', ->
+			cachedMethod = cache.cachify((cb) -> cb())
+			assert cachedMethod.getOptions().cacheName, 'did not find a valid cacheName'
+
+		it 'should return the cache object, with public methods, without error', (done) ->
 			methodToCache = (opt, cb) -> cb() # just call back
-			isFunction = (fn) -> fn and fn instanceof Function
 			assert.doesNotThrow ->
 				cachedMethod = cache.cachify(methodToCache, { args: {}, updateCacheOnCreation: true })
 				assert.ok cachedMethod
@@ -19,7 +56,7 @@ describe 'cache', ->
 				assert.ok isFunction(cachedMethod.getOptions)
 			done()
 
-		it 'should execute the cached method with no arguments, without error', (done) ->
+		it 'should execute the cache object when called with no arguments, without error', (done) ->
 			methodToCache = (cb) -> cb() # just call back
 			cachedMethod = cache.cachify(methodToCache, { updateCacheOnCreation: true })
 			done()

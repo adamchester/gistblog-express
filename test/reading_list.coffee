@@ -5,7 +5,7 @@ _ = require 'underscore'
 
 rl = require '../lib/reading_list'
 th = require './test_helpers'
-pkt = require './lib_pocket'
+pkt = require './assets/pocket'
 
 readingListItemFields = ['title', 'url', 'tags', 'time_added']
 tagFields = ['name', 'href']

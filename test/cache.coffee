@@ -1,5 +1,6 @@
 describe 'cache', ->
 
+	util = require 'util'
 	_ = require 'underscore'
 	th = require './test_helpers'
 	assert = require 'assert'
@@ -7,23 +8,33 @@ describe 'cache', ->
 
 	describe 'cachify', ->
 
+		it 'should return the cached method, with public without error', (done) ->
+			methodToCache = (opt, cb) -> cb() # just call back
+			isFunction = (fn) -> fn and fn instanceof Function
+			assert.doesNotThrow ->
+				cachedMethod = cache.cachify(methodToCache, { args: {}, updateCacheOnCreation: true })
+				assert.ok cachedMethod
+				assert.ok isFunction(cachedMethod.get)
+				assert.ok isFunction(cachedMethod.update)
+				assert.ok isFunction(cachedMethod.getOptions)
+			done()
+
+		it 'should execute the cached method with no arguments, without error', (done) ->
+			methodToCache = (cb) -> cb() # just call back
+			cachedMethod = cache.cachify(methodToCache, { updateCacheOnCreation: true })
+			done()
+
 		it 'should throw an error if no args were passed in but the method requires args', (done) ->
-			# todo
+			assert.throws -> 
+				invalidMethodToCache = (opt, cb) -> cb() # method requires args (opt)
+				cachedMethod = cache.cachify(invalidMethodToCache, { args: undefined }) # args not defined
 			done()
 
 		it 'should throw an error if args were passed in but the method requires no args', (done) ->
-			# todo
+			assert.throws -> 
+				invalidMethodToCache = (cb) -> cb() # method requires no args (just callback)
+				cachedMethod = cache.cachify(invalidMethodToCache, { args: {} }) # args defined
 			done()
-
-		it 'should execute the cached method with arguments', (done) ->
-			methodToCache = (opt, cb) -> cb() # just call back
-			cachedMethod = cache.cachify(methodToCache, { args: {}, updateCacheOnCreation: true })
-			cachedMethod.get (error, value) -> assert.ifError(error); done()
-
-		it 'should execute the cached method with no arguments', (done) ->
-			methodToCache = (cb) -> cb() # just call back
-			cachedMethod = cache.cachify(methodToCache, { updateCacheOnCreation: true })
-			cachedMethod.get (error, value) -> assert.ifError(error); done()
 
 	describe 'get', ->
 		it 'should execute the callback with an error when the initial caching gives an error', ->

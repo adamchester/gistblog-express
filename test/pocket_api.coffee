@@ -26,8 +26,7 @@ describe 'pocket', ->
 
 		combined = appendNew(existingItems, newItems)
 		combined = _(combined).sortBy((i) -> i.time_added).reverse()
-
-		console.log "existing: #{existingItems.length}, new: #{newItems.length}, combined: #{combined.length}"
+		# console.log "existing: #{existingItems.length}, new: #{newItems.length}, combined: #{combined.length}"
 
 
 	# it 'should find the last added item, get the newer ones, and combine to the list', (done) ->
@@ -50,7 +49,7 @@ describe 'pocket', ->
 
 		list = require './assets/reading_list.json'
 		items = _.chain(list.list).map(rl.toReadingListItem).value()
-		console.log(JSON.stringify(items))
+		# console.log(JSON.stringify(items))
 		done()
 
 	# it 'should get the stats', (done) ->

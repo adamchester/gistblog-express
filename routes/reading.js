@@ -5,18 +5,18 @@ var Reading = (function Reading() {
 	function Constructor() {}
 
 	function index(req, res) {
-		s.getReadingListViewModel(function(error, model) {
+		s.getReadingListViewModel(function(error, viewModel) {
 			if (error) throw error;
-			res.render('reading', model);
+			res.render(viewModel.pageTemplateName, viewModel);
 		});
 	}
 
 	function tag(req, res) {
 
 		var tagName = req.params.tagName;
-		s.getReadingTagViewModel(tagName, function gotTagViewModel(error, model) {
+		s.getReadingTagViewModel(tagName, function gotTagViewModel(error, viewModel) {
 			if (error) throw error;
-			res.render('reading_tag', model);
+			res.render(viewModel.pageTemplateName, viewModel);
 		});
 	}
 

@@ -38,30 +38,35 @@ mockGithubApis = (validGistIds, invalidGistId) ->
 module.exports.mockGithubApis = mockGithubApis
 
 # some simple assert helpers
+module.exports.isFunc = (fn) -> _.isFunction(fn)
+module.exports.isFunction = (fn) -> _.isFunction(fn)
+module.exports.isObject = (obj) -> _.isObject(obj)
+module.exports.isNumber = (num) -> _.isNumber(num)
+module.exports.isBool = (bool) -> _.isBoolean(bool)
+
 module.exports.assertCallbackSuccess = assertCallbackSuccess = (result, error, done, additional) ->
-	assert result
-	assert !error
+	assert result, "the result should be truthy, got #{result} instead"
+	assert !error, "the error should be falsy, got #{error} instead"
 	if additional then additional()
 	done()
-
 
 module.exports.assertCallbackResRender = assertCallbackResRender = (routeMethod, expectedTemplateName, done) ->
 	req = { params: { id: 1 } }
 	res = 
 		render: (name, model) ->
 			assert name is expectedTemplateName, "expected #{routeMethod} to call res.render with #{expectedTemplateName} as the first param"
-			assert model
+			assert model, "expected #{routeMethod} to call res.render with a model"
 			done()
-	# call the function 
-	routeMethod(req, res)
+	# call the function
+	assert.doesNotThrow ->
+		routeMethod(req, res)
 
 module.exports.assertCallbackError = assertCallbackError = (result, error, done, additional) ->
 	# console.log "#{result}, #{error}"
-	assert !result
-	assert error
+	assert !result, "the result should be falsy, got #{result} instead"
+	assert error, "the error should be truthy, got #{error} instead"
 	if additional then additional()
 	done()
-
 
 module.exports.assertHasFields = assertHasFields = (object, fields) -> 
 	# console.log JSON.stringify(object)

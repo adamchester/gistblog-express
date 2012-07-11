@@ -11,12 +11,9 @@ var About = (function About() {
 	* GET /about page.
 	*/
 	function index(req, res) {
-
-		s.getSharedViewModel('about', function gotSharedViewModel(err, sharedModel) {
-			res.render('about', {
-				shared: sharedModel,
-				title: 'About rarely updated'
-			});
+		var thisPage = s.topLevelPages.about;
+		s.getSharedViewModel(thisPage, function gotSharedViewModel(err, sharedModel) {
+			res.render(thisPage.id, { shared: sharedModel, title: thisPage.title });
 		});
 	}
 

@@ -11,7 +11,7 @@ var Posts = function() {
 	this.index = function(req, res) {
 		shared.getIndexViewModel(function(error, viewModel) {
 			if (error) throw error;
-			res.render('index', viewModel);
+			res.render(viewModel.pageTemplateName, viewModel);
 		});
 	};
 
@@ -19,13 +19,13 @@ var Posts = function() {
 		var postId = req.params.id;
 		shared.getPostViewModel(postId, function(error, viewModel) {
 			if (error) throw error;
-			res.render('post', viewModel);
+			res.render(viewModel.pageTemplateName, viewModel);
 		});
 	};
 
 	this.twitter = function(req, res) {
-		shared.getSharedViewModel('twitter', function gotSharedViewModel(error, model) {
-			res.render('twitter', { title: 'Twitter', shared: model });
+		shared.getTwitterViewModel(function gotSharedViewModel(error, viewModel) {
+			res.render(viewModel.pageTemplateName, viewModel);
 		});
 	};
 };

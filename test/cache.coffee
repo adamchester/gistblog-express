@@ -6,12 +6,16 @@ describe 'cache', ->
 	th = require './test_helpers'
 	assert = require 'assert'
 	cache = require '../lib/cache'
+	logging = require '../lib/logging'
+
+	# logging.setLogger('info', -> )
+	# logging.setLogger('error', ->)
 
 	# helpers
-	isFunction = (fn) -> _.isFunction(fn)
-	isObject = (obj) -> _.isObject(obj)
-	isNumber = (num) -> _.isNumber(num)
-	isBool = (bool) -> _.isBoolean(bool)
+	isFunction = (fn) -> th.isFunc(fn)
+	isObject = (obj) -> th.isObject(obj)
+	isNumber = (num) -> th.isNumber(num)
+	isBool = (bool) -> th.isBoolean(bool)
 
 	describe 'exports', ->
 		it 'should include itself', -> assert.ok cache

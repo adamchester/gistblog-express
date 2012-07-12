@@ -5,6 +5,8 @@ th = require './test_helpers'
 
 describe 'gists', ->
 
+	expectedBlogPostFields = ['id', 'title', 'date', 'content_md', 'content_html', 'comment_count']
+
 	describe 'module', ->
 		it 'should export', -> assert gists isnt undefined
 		it 'should export getGistMarkdown', -> assert gists.getGistMarkdown isnt undefined
@@ -45,27 +47,27 @@ describe 'gists', ->
 						assert not markdown
 						assert not html
 
-		describe '#getBlogPostsForUser()', ->
-
-			it 'should return objects with fields: [id, title, date, content_md, content_html, comment_count]', (done) ->
-				gists.getBlogPostsForUser {username: 'adamchester', allContents: true}, (error, posts) ->
-					th.assertCallbackSuccess posts, error, done, ->
-						th.assertHasFields(post, ["id", "title", "date", "content_md", "content_html", "comment_count"]) for post in posts
-
-			it 'should return null with an error when the user does not exist', (done) ->
-				gists.getBlogPostsForUser {username: 'invalid'}, (error, posts) -> 
-					th.assertCallbackError posts, error, done
-
 		describe '#getBlogPost()', ->
 
 			it 'should return the post with fields: [id, title, date, content_md, content_html, comment_count]', (done) ->
 				gists.getBlogPost 2944558, (error, post) -> 
 					th.assertCallbackSuccess post, error, done, ->
-						th.assertHasFields(post, ["id", "title", "date", "content_md", "content_html", "comment_count"])
+						th.assertHasFields post, expectedBlogPostFields
 
 			it 'should return null with an error when the post does not exist', (done) ->
 				gists.getBlogPost 9999999999, (error, post) -> 
 					th.assertCallbackError post, error, done
+
+		describe '#getBlogPostsForUser()', ->
+
+			it 'should return objects with fields: [id, title, date, content_md, content_html, comment_count]', (done) ->
+				gists.getBlogPostsForUser {username: 'adamchester', allContents: true}, (error, posts) ->
+					th.assertCallbackSuccess posts, error, done, ->
+						th.assertHasFields(post, expectedBlogPostFields) for post in posts
+
+			it 'should return null with an error when the user does not exist', (done) ->
+				gists.getBlogPostsForUser {username: 'invalid'}, (error, posts) ->
+					th.assertCallbackError posts, error, done
 
 
 

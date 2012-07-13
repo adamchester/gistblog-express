@@ -1,31 +1,22 @@
-var s = require('../lib/shared');
+/*jshint node: true */
 
-var Reading = (function Reading() {
+module.exports = function(app) {
 
-	function Constructor() {}
+	var s = require('../lib/shared');
 
-	function index(req, res) {
-		s.getReadingListViewModel(function(error, viewModel) {
+	app.get('/reading', function index (req, res) {
+		s.getReadingListViewModel(function (error, viewModel) {
 			if (error) throw error;
 			res.render(viewModel.pageTemplateName, viewModel);
 		});
-	}
+	});
 
-	function tag(req, res) {
-
+	app.get('/reading/tags/:tagName', function tag (req, res) {
 		var tagName = req.params.tagName;
-		s.getReadingTagViewModel(tagName, function gotTagViewModel(error, viewModel) {
+		s.getReadingTagViewModel(tagName, function (error, viewModel) {
 			if (error) throw error;
 			res.render(viewModel.pageTemplateName, viewModel);
 		});
-	}
+	});
 
-	Constructor.prototype = {
-		tag: tag,
-		index: index
-	};
-
-	return Constructor;
-})();
-
-exports.Reading = new Reading();
+};

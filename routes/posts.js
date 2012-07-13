@@ -1,33 +1,34 @@
+/*jshint node: true */
 
-/*
- * GET home page.
- */
+module.exports = function(app) {
 
-var shared = require('../lib/shared')
-;
+	var s = require('../lib/shared');
 
-var Posts = function() {
-
-	this.index = function(req, res) {
-		shared.getIndexViewModel(function(error, viewModel) {
+	/** GET /[index]
+	 */
+	app.get('/', function index (req, res) {
+		s.getIndexViewModel(function (error, viewModel) {
 			if (error) throw error;
 			res.render(viewModel.pageTemplateName, viewModel);
 		});
-	};
+	});
 
-	this.post = function(req, res) {
+	/** GET /posts/:id
+	 */
+	app.get('/posts/:id', function post (req, res) {
 		var postId = req.params.id;
-		shared.getPostViewModel(postId, function(error, viewModel) {
+		s.getPostViewModel(postId, function (error, viewModel) {
 			if (error) throw error;
 			res.render(viewModel.pageTemplateName, viewModel);
 		});
-	};
+	});
 
-	this.twitter = function(req, res) {
-		shared.getTwitterViewModel(function gotSharedViewModel(error, viewModel) {
+	/** GET /twitter
+	 */
+	app.get('/twitter', function twitter (req, res) {
+		s.getTwitterViewModel(function (error, viewModel) {
 			res.render(viewModel.pageTemplateName, viewModel);
 		});
-	};
-};
+	});
 
-exports.Posts = new Posts();
+};

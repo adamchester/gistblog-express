@@ -1,27 +1,14 @@
+/*jshint node: true */
 
-var s = require('../lib/shared');
+module.exports = function(app) {
 
-var About = (function About() {
+	var s = require('../lib/shared');
 
-
-	function Constructor() {
-	}
-
-	/*
-	* GET /about page.
-	*/
-	function index(req, res) {
-		var thisPage = s.topLevelPages.about;
-		s.getSharedViewModel(thisPage, function gotSharedViewModel(err, sharedModel) {
-			res.render(sharedModel.pageTemplateName, sharedModel);
+	app.get('/about', function(req, res) {
+		s.getAboutViewModel(function (err, model) {
+			res.render(model.pageTemplateName, model);
 		});
-	}
 
-	Constructor.prototype = {
-		index: index
-	};
+	});
 
-	return Constructor;
-})();
-
-exports.About = new About();
+};

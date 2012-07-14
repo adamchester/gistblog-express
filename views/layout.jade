@@ -26,7 +26,7 @@ html
 				span.i-bar: i.icon-chevron-down.icon-white
 			a(class='brand', href='/') Rarely updated
 			div.nav-collapse: ul.nav
-				each link in topLevelMenuItems
+				each link in shared.topLevelMenuItems
 					li(class=link.classes): a(href=link.href)= link.text
 
 		div(class='container-fluid')
@@ -34,7 +34,7 @@ html
 				div.span9
 					block content
 				div.span3
-					mixin sidebar(topLevelMenuItems, readingListTags)
+					mixin sidebar(shared.topLevelMenuItems, shared.readingListTags)
 
 		script(type='text/javascript', src='/javascripts/underscore-min.js')
 		script(type='text/javascript', src='/javascripts/jquery.min.js')

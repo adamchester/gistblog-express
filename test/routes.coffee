@@ -1,50 +1,33 @@
 
-assert = require 'assert'
-th = require './test_helpers'
+describe 'routes/', ->
+	
+	assert = require 'assert'
+	th = require './test_helpers'
 
-routes = 
-	About: require('../routes/about').About
-	Reading: require('../routes/reading').Reading
-	Posts: require('../routes/posts').Posts
+	isFunction = th.isFunction
 
-describe 'routes', ->
+	expectedRouteMap =
+		about: ['/about']
+		global: ['/403', '/404', '/500']
+		posts: ['/', '/posts/:id', '/twitter']
+		reading: ['/reading', '/reading/tags/:tagName']
 
-	githubApiScopes = null
-	beforeEach -> githubApiScopes = th.mockGithubApis([2944558, 2861047], 9999999999)
-	afterEach -> githubApiScopes.done()
+	it 'should map the correct routes', ->
 
-	describe 'About', ->
-		it 'should export About', -> assert routes.About isnt undefined
-		it 'should export About.index', -> 	assert routes.About.index isnt undefined
+		[actualRoutes, currentModuleName] = [{}, '']
 
-		describe '#About.index()', ->
-			it 'should call res.render with about template', (done) ->
-				th.assertCallbackResRender routes.About.index, 'about', done
+		# mock 'app' object so it progressively builds actualRoutes
+		app = get: (routePattern) ->
+			actualRoutes[currentModuleName] ?= []
+			actualRoutes[currentModuleName].push(routePattern)
 
-	describe 'Reading', ->
-		it 'should export Reading', -> assert routes.Reading isnt undefined
-		it 'should export Reading.index', -> assert routes.Reading.index isnt undefined
+		# put the routes for each module into our local routes object
+		buildRoutes = (forModuleName) ->
+			currentModuleName = forModuleName
+			routeModuleInitialiser = require("../routes/#{forModuleName}")
+			assert isFunction(routeModuleInitialiser), "expected the route module #{forModuleName} to return a function"
+			routeModuleInitialiser(app)
 
-		describe '#Reading.index', ->
-			it 'should call res.render with reading template', (done) ->
-				th.assertCallbackResRender routes.Reading.index, 'reading', done
+		buildRoutes(name) for name, routes of expectedRouteMap
 
-	describe 'Posts', ->
-		it 'should export Posts', -> assert routes.Posts isnt undefined
-		it 'should export Posts.index', -> assert routes.Posts.index isnt undefined
-		it 'should export Posts.post', -> assert routes.Posts.post isnt undefined
-		it 'should export Posts.twitter', -> assert routes.Posts.twitter isnt undefined
-
-		describe '#Posts.index', ->
-			it 'should call res.render with reading template', (done) ->
-				th.assertCallbackResRender routes.Posts.index, 'index', done
-
-		# todo: harder to mock this stuff
-		# describe '#Posts.post', ->
-		# 	it 'should call res.render with post template', (done) ->
-		# 		th.assertCallbackResRender routes.Posts.post, 'post', done
-
-		describe '#Posts.twitter', ->
-			it 'should call res.render with twitter template', (done) ->
-				th.assertCallbackResRender routes.Posts.twitter, 'twitter', done
-
+		assert.deepEqual actualRoutes, expectedRouteMap

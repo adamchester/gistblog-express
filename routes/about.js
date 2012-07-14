@@ -1,14 +1,19 @@
 /*jshint node: true */
+"use strict";
+
+var l = require('../middleware/layout');
+var s = require('../lib/shared');
 
 module.exports = function(app) {
 
-	var s = require('../lib/shared');
+	var aboutPage = l.topLevelPages.about;
 
-	app.get('/about', function(req, res) {
+	/*
+	GET /about
+	*/
+	app.get(aboutPage.routePattern, l.forTopLevelPage(aboutPage), function(req, res) {
 		s.getAboutViewModel(function (err, model) {
-			res.render(model.pageTemplateName, model);
+			res.render(aboutPage.pageTemplateName, model);
 		});
-
 	});
-
 };

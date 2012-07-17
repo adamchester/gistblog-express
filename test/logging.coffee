@@ -15,6 +15,10 @@ describe 'logging', ->
 	assertLogMessageEquals = (actual, kind, expectedWithoutTestPrefix) ->
 		assert.equal actual, (testPrefixMessage(kind) + expectedWithoutTestPrefix)
 
+	# make sure we're in a known state before and after
+	beforeEach -> logging.resetDefaults()
+	afterEach -> logging.resetDefaults()
+
 	it 'should export itself', -> assert logging
 	it 'should export a function called forModule', -> assert isFunction logging.forModule
 	it 'should export a function called setLogger', -> assert isFunction logging.setLogger

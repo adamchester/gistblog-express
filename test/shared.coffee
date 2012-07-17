@@ -3,75 +3,54 @@ describe 'shared', ->
 	assert = require 'assert'
 	s = require '../lib/shared'
 	th = require './test_helpers'
+	logging = require '../lib/logging'
 
-	# helpers
-	isFunction = (fn) -> th.isFunction(fn)
-	isObject = (obj) -> th.isObject(obj)
-	isNumber = (num) -> th.isNumber(num)
-	isBool = (bool) -> th.isBoolean(bool)
+	expectedTopLevelPageFields = ['id', 'routePattern', 'name', 'href', 'title', 'pageTemplateName']
+	expectedSharedViewModelFields = ['currentTopLevelPage', 'readingListTags', 'topLevelMenuItems', 'pageTemplateName', 'title']
+	expectedTopLevelMenuItemFields = ['href', 'text', 'classes']
 
-	assertIsViewModel = (viewModel) ->
-		assert (viewModel instanceof s.ViewModel)
+	# assert helpers
+	isFunction = (fn) -> assert th.isFunction(fn)
+	assertIsObject = (obj) -> assert th.isObject(obj)
+	isNumber = (num) -> assert th.isNumber(num)
+	isBool = (bool) -> assert th.isBoolean(bool)
+	isAsyncFunction = (fn) -> assert th.isAsyncFunction(fn)
+	isConstructor = (fn) -> assert th.isConstructor(fn)
+	isViewModel = (obj) -> assert (obj instanceof s.ViewModel)
+	hasTopLevelPageFields = (topLevelPages) -> th.assertHasFields(item, expectedTopLevelPageFields) for item in topLevelPages
+	hasSharedViewModelFields = (obj) -> th.assertHasFields(item, expectedSharedViewModelFields)
+	canCallbackWithValidPostId = (fn, cb) -> fn validPostId1, (err, result) -> th.assertCallbackSuccess result, err, cb
+	canCallbackWithNoArgs = (fn, cb) -> fn (err, result) -> th.assertCallbackSuccess result, err, cb
+	canCallbackWithValidTagName = (fn, cb) -> fn 'abc', (err, result) -> th.assertCallbackSuccess result, err, cb
+	canCallbackWithValidTopLevelPage = (fn, cb) -> fn(s.topLevelPages.index, ((err, result) -> th.assertCallbackSuccess result, err, cb))
 
+	# mock data
 	validPostId1 = 2944558
 	validPostId2 = 2861047
 	invalidPostId = 9999999999
 
-	describe 'module', ->
+	# set our module expectations
+	expectedExports =
+		topLevelPages: 				asserts: [assertIsObject, hasTopLevelPageFields]
+		isTopLevelPage: 			asserts: [isFunction]
+		ViewModel:					asserts: [isConstructor]
+		SharedLayoutViewModel:		asserts: [isConstructor]
+		getSharedLayoutViewModel: 	asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithValidTopLevelPage]
+		getAboutViewModel: 			asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithNoArgs]
+		getIndexViewModel: 			asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithNoArgs]
+		getPostViewModel: 			asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithValidPostId]
+		getTwitterViewModel: 		asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithNoArgs]
+		getReadingTagViewModel: 	asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithValidTagName]
+		getReadingListViewModel: 	asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithNoArgs]
 
-		it 'should export topLevelPages', -> assert.ok s.topLevelPages
-		it 'should export ViewModel', -> assert.ok s.ViewModel
-		it 'should export SharedViewModel', -> assert.ok s.SharedViewModel
-		it 'should export getAboutViewModel', -> assert isFunction(s.getAboutViewModel)
-		it 'should export getSharedViewModel', -> assert isFunction(s.getSharedViewModel)
-		it 'should export getIndexViewModel', -> assert isFunction(s.getIndexViewModel)
-		it 'should export getReadingListViewModel', -> assert isFunction(s.getReadingListViewModel)
-		it 'should export getReadingTagViewModel', -> assert isFunction(s.getReadingTagViewModel)
-		it 'should export getPostViewModel', -> assert isFunction(s.getPostViewModel)
-		it 'should export getTwitterViewModel', -> assert isFunction(s.getTwitterViewModel)
+	# it 'prints', -> th.printExports s
 
-	describe 'method', ->
+	describe 'exports', ->
+		scopes = null
+		beforeEach ->
+			scopes = th.mockGithubApis [validPostId1, validPostId2], invalidPostId
+		afterEach -> scopes.done()
 
-		githubApiScopes = null
-		beforeEach -> githubApiScopes = th.mockGithubApis([validPostId1, validPostId2], invalidPostId)
-		afterEach -> githubApiScopes.done()
-
-		describe '#getPostViewModel()', ->
-
-			it 'should return a ViewModel with expected fields', (done) ->
-				s.getPostViewModel validPostId1, (err, model) -> th.assertCallbackSuccess model, err, done, ->
-					assertIsViewModel model
-
-			it 'should work with a string postId', (done) ->
-				s.getPostViewModel "#{validPostId1}", (err, model) -> th.assertCallbackSuccess model, err, done, ->
-					assert model.item isnt null
-
-		describe '#getReadingListViewModel()', ->
-	
-			it 'should return a ViewModel with expected fields', (done) ->
-				s.getReadingListViewModel (err, model) -> th.assertCallbackSuccess model, err, done, ->
-					assertIsViewModel model
-					assert model.items isnt undefined
-					assert model.items.length > 0, 'expected items to be an array/list with at least one item'
-
-		describe '#getSharedViewModel()', ->
-
-			it 'should return a ViewModel with expected fields', (done) ->
-
-				expectedSharedViewModelFields = ['currentTopLevelPage', 'readingListTags', 'topLevelMenuItems', 'pageTemplateName', 'title']
-				expectedTopLevelMenuItemFields = ['href', 'text', 'classes']
-
-				s.getSharedViewModel s.topLevelPages.index, (err, model) -> th.assertCallbackSuccess model, err, done, ->
-					assertIsViewModel model
-					th.assertHasFields model, expectedSharedViewModelFields
-					th.assertHasFields item, expectedTopLevelMenuItemFields for item in model.topLevelMenuItems
-
-		describe '#getIndexViewModel()', ->
-
-			it 'should return a ViewModel with expected fields', (done) ->
-				s.getIndexViewModel (err, model) -> th.assertCallbackSuccess model, err, done, ->
-					assertIsViewModel model
-					th.assertHasFields model, ['posts']
-
-
+		it 'should have the correct exports', (done) ->
+			th.assertValidExports s, expectedExports, () -> done()
 

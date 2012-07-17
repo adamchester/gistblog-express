@@ -2,6 +2,9 @@
 nock = require 'nock'
 assert = require 'assert'
 _ = require 'underscore'
+util = require 'util'
+async = require 'async'
+logging = require '../lib/logging'
 
 # use the nock library to capture requests to the github API
 mockGithubApis = (validGistIds, invalidGistId) ->
@@ -28,14 +31,23 @@ mockGithubApis = (validGistIds, invalidGistId) ->
 
 	# return our nock scopes, so the caller call done() if necessary
 	githubScopes = [githubApi, githubRaw]
+	
+	logger = logging.forModule('mockGithubApis')
+	logger.info "mocked"
 	return {
 		scopes: githubScopes
 		done: () ->
 			nock = nock.cleanAll()
+			logger.info "unmocked"
 			# scope.done() for scope in githubScopes
 	}
 
 module.exports.mockGithubApis = mockGithubApis
+
+module.exports.printExports = printExports = (module) ->
+	console.log "expectedExports = \# for #{util.inspect(module, true, 5, true)}"
+	console.log "\t#{name}: '#{typeof value}'" for name, value of module
+
 
 # some simple assert helpers
 module.exports.isFunc = (fn) -> _.isFunction(fn)
@@ -43,6 +55,49 @@ module.exports.isFunction = (fn) -> _.isFunction(fn)
 module.exports.isObject = (obj) -> _.isObject(obj)
 module.exports.isNumber = (num) -> _.isNumber(num)
 module.exports.isBool = (bool) -> _.isBoolean(bool)
+module.exports.isConstructor = (obj) -> _.isFunction(obj) # todo
+module.exports.isAsyncFunction = (fn) -> _.isFunction(fn) # todo
+
+
+# extract names, details, and matching export (if any)
+module.exports.ExpectedExport = class ExpectedExport
+
+	constructor: (@name, @details, @fromModule) ->
+		@exported = @fromModule[@name] # lookup the exported item by name
+		@asserts = @details?.asserts
+		@asyncAsserts = @details?.asyncAsserts
+
+	doAsserts: (cb) ->
+		assert _.isFunction(cb), "The callback function must be provided"
+
+		# non-async asserts
+		asserter(@exported) for asserter in @asserts
+
+		# async asserts
+		theExport = @exported # 'this' is not accessible inside the async.forEach
+		theAsserts = @asyncAsserts
+		return cb() if not theAsserts # just callback right away if not asserts
+
+		async.forEachSeries(
+			theAsserts
+			(asyncAsserter, afesCallback) -> asyncAsserter(theExport, (err) -> afesCallback(err))
+			(err) -> assert(not err, "got error in an asyncAssert for #{@name}: #{JSON.stringify(err)}"); cb()
+		)
+
+module.exports.assertValidExports = assertValidExports = (module, expectedNamesAndTypes, done) ->
+
+	logger = logging.forModule('assertValidExports')
+
+	expectedItems = (new ExpectedExport(n,d,module) for n, d of expectedNamesAndTypes)
+
+	doAsserts = (item, cb) ->
+		logger.info("checking export #{util.inspect(item.name)}")
+		item.doAsserts(()-> cb())
+
+	onFinishedAsserts = (err) -> assert not err; done()
+
+	async.forEachSeries expectedItems, doAsserts, onFinishedAsserts
+
 
 module.exports.assertCallbackSuccess = assertCallbackSuccess = (result, error, done, additional) ->
 	assert result, "the result should be truthy, got #{result} instead"
@@ -69,7 +124,8 @@ module.exports.assertCallbackError = assertCallbackError = (result, error, done,
 	done()
 
 module.exports.assertHasFields = assertHasFields = (object, fields) -> 
-	# console.log JSON.stringify(object)
+	# console.log "assertHasFields for fields #{JSON.stringify(fields)}"
 	for field in fields
 		fieldValue = object[field]
-		assert fieldValue || fieldValue == 0 || fieldValue == '', "expected a field named '#{field}' on: #{JSON.stringify(object)}"
+		# console.log fieldValue
+		assert fieldValue?, "expected a field named '#{field}' on: #{JSON.stringify(object)}"

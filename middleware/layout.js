@@ -35,7 +35,7 @@ function sharedLayoutMiddleware (req, res, next) {
 	var topLevelPage = res.locals.topLevelPage;
 
 	// NOTE: topLevelPages.none || null || undefined is a valid top level page
-	s.getSharedViewModel(topLevelPage, function gotSharedViewModel (err, model) {
+	s.getSharedLayoutViewModel(topLevelPage, function gotSharedViewModel (err, model) {
 		if (err) return next(err);
 
 		res.locals({ shared: model });

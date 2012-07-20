@@ -1,28 +1,26 @@
-
 describe 'cache', ->
 
 	util = require 'util'
 	_ = require 'underscore'
-	th = require './test_helpers'
 	assert = require 'assert'
-	cache = require '../lib/cache'
+	events = require 'events'
 	logging = require '../lib/logging'
-
-	# logging.setLogger('info', -> )
-	# logging.setLogger('error', ->)
+	th = require './test_helpers'
+	a = require './asserters'
+	cache = require '../lib/cache'
 
 	# helpers
-	isFunction = (fn) -> th.isFunc(fn)
-	isObject = (obj) -> th.isObject(obj)
-	isNumber = (num) -> th.isNumber(num)
-	isBool = (bool) -> th.isBoolean(bool)
+	isFunction = (fn) -> _.isFunction(fn)
 
 	describe 'exports', ->
-		it 'should include itself', -> assert.ok cache
-		it 'should include getOptions (function)', -> assert isFunction(cache.getOptions)
-		it 'should include getOption (function)', -> assert isFunction(cache.getOption)
-		it 'should include setOption (function)', -> assert isFunction(cache.setOption)
-		it 'should include cachify (function)', -> assert isFunction(cache.cachify)
+
+		cacheExports =
+			getOptions: [ a.ReturnValueEquals([ 'expiryMinutes', 'getLogger' ]) ]
+			getOption: [ a.ReturnValueEquals( 5.0, 'expiryMinutes' ) ]
+			setOption: [ a.IsFunction ]
+			cachify: [ a.IsFunction ]
+
+		it 'should be valid', (done) -> a.verify cacheExports, '../lib/cache', done
 
 	describe 'option', ->
 		describe 'getLogger', ->
@@ -54,10 +52,10 @@ describe 'cache', ->
 			methodToCache = (opt, cb) -> cb() # just call back
 			assert.doesNotThrow ->
 				cachedMethod = cache.cachify(methodToCache, { args: {}, updateCacheOnCreation: true })
-				assert.ok cachedMethod
-				assert.ok isFunction(cachedMethod.get)
-				assert.ok isFunction(cachedMethod.update)
-				assert.ok isFunction(cachedMethod.getOptions)
+				assert cachedMethod
+				assert isFunction(cachedMethod.get)
+				assert isFunction(cachedMethod.update)
+				assert isFunction(cachedMethod.getOptions)
 			done()
 
 		it 'should execute the cache object when called with no arguments, without error', (done) ->

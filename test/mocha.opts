@@ -1,7 +1,8 @@
 --compilers coffee:coffee-script
 --require assert
---watch
 --reporter list
 --ui bdd
 --timeout 6000
+--growl
+--debug
 --bail

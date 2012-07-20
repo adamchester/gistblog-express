@@ -3,8 +3,9 @@ describe 'routes/', ->
 	
 	assert = require 'assert'
 	th = require './test_helpers'
+	_ = require 'underscore'
 
-	isFunction = th.isFunction
+	isFunction = _.isFunction
 
 	expectedRouteMap =
 		about: ['/about']

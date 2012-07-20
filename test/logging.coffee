@@ -6,7 +6,7 @@ describe 'logging', ->
 	_ = require 'underscore'
 
 	# helpers
-	isFunction = th.isFunction
+	isFunction = _.isFunction
 	expectedLoggerFields = ['info', 'error']
 
 	# message prefix helpers

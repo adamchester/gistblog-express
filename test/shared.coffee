@@ -4,25 +4,17 @@ describe 'shared', ->
 	s = require '../lib/shared'
 	th = require './test_helpers'
 	logging = require '../lib/logging'
+	a = require './asserters'
 
-	expectedTopLevelPageFields = ['id', 'routePattern', 'name', 'href', 'title', 'pageTemplateName']
-	expectedSharedViewModelFields = ['currentTopLevelPage', 'readingListTags', 'topLevelMenuItems', 'pageTemplateName', 'title']
-	expectedTopLevelMenuItemFields = ['href', 'text', 'classes']
+	baseViewModelFields = ['title', 'pageTemplateName', 'topLevelPage']
+	topLevelPageFields = ['id', 'routePattern', 'name', 'href', 'title', 'pageTemplateName']
+	sharedViewModelFields = ['currentTopLevelPage', 'readingListTags', 'topLevelMenuItems', 'pageTemplateName', 'title']
+	readingListTagFields = ['todo']
+	topLevelMenuItemFields = ['href', 'text', 'classes']
 
-	# assert helpers
-	isFunction = (fn) -> assert th.isFunction(fn)
-	assertIsObject = (obj) -> assert th.isObject(obj)
-	isNumber = (num) -> assert th.isNumber(num)
-	isBool = (bool) -> assert th.isBoolean(bool)
-	isAsyncFunction = (fn) -> assert th.isAsyncFunction(fn)
-	isConstructor = (fn) -> assert th.isConstructor(fn)
-	isViewModel = (obj) -> assert (obj instanceof s.ViewModel)
-	hasTopLevelPageFields = (topLevelPages) -> th.assertHasFields(item, expectedTopLevelPageFields) for item in topLevelPages
-	hasSharedViewModelFields = (obj) -> th.assertHasFields(item, expectedSharedViewModelFields)
-	canCallbackWithValidPostId = (fn, cb) -> fn validPostId1, (err, result) -> th.assertCallbackSuccess result, err, cb
-	canCallbackWithNoArgs = (fn, cb) -> fn (err, result) -> th.assertCallbackSuccess result, err, cb
-	canCallbackWithValidTagName = (fn, cb) -> fn 'abc', (err, result) -> th.assertCallbackSuccess result, err, cb
-	canCallbackWithValidTopLevelPage = (fn, cb) -> fn(s.topLevelPages.index, ((err, result) -> th.assertCallbackSuccess result, err, cb))
+	indexViewModelFields = baseViewModelFields.concat ['posts']
+	twitterViewModelFields = baseViewModelFields
+	readingTagViewModelFields = baseViewModelFields.concat ['items', 'tag']
 
 	# mock data
 	validPostId1 = 2944558
@@ -31,19 +23,19 @@ describe 'shared', ->
 
 	# set our module expectations
 	expectedExports =
-		topLevelPages: 				asserts: [assertIsObject, hasTopLevelPageFields]
-		isTopLevelPage: 			asserts: [isFunction]
-		ViewModel:					asserts: [isConstructor]
-		SharedLayoutViewModel:		asserts: [isConstructor]
-		getSharedLayoutViewModel: 	asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithValidTopLevelPage]
-		getAboutViewModel: 			asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithNoArgs]
-		getIndexViewModel: 			asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithNoArgs]
-		getPostViewModel: 			asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithValidPostId]
-		getTwitterViewModel: 		asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithNoArgs]
-		getReadingTagViewModel: 	asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithValidTagName]
-		getReadingListViewModel: 	asserts: [isAsyncFunction], asyncAsserts: [canCallbackWithNoArgs]
+		topLevelPages: 					[ a.IsObject, a.HasFieldsOfEach(topLevelPageFields) ]
+		isTopLevelPage: 				[ a.IsFunction ] # todo: bother doing this?
+		ViewModel:						[ a.ReturnsFields(baseViewModelFields, 'myTitle', 'myPageTemplateName') ] #todo check fields
+		SharedLayoutViewModel:		[ a.ReturnsFields(sharedViewModelFields, s.topLevelPages.index, {}) ] #todo check fields
 
-	# it 'prints', -> th.printExports s
+		# todo sharedViewModelFields, topLevelMenuItemFields, readingListTagFields
+		getSharedLayoutViewModel: 	[ a.MustCallback(s.topLevelPages.index) ]
+		getAboutViewModel: 			[ a.MustCallbackWithFields(baseViewModelFields) ]
+		getIndexViewModel: 			[ a.MustCallbackWithFields(indexViewModelFields) ]
+		getPostViewModel: 			[ a.MustCallback(validPostId1) ]
+		getTwitterViewModel:			[ a.MustCallbackWithFields(twitterViewModelFields) ]
+		getReadingTagViewModel:		[ a.MustCallbackWithFields( ['tag', 'items'] , 'abc') ]
+		getReadingListViewModel:		[ a.MustCallback() ]
 
 	describe 'exports', ->
 		scopes = null
@@ -51,6 +43,5 @@ describe 'shared', ->
 			scopes = th.mockGithubApis [validPostId1, validPostId2], invalidPostId
 		afterEach -> scopes.done()
 
-		it 'should have the correct exports', (done) ->
-			th.assertValidExports s, expectedExports, () -> done()
+		it 'should have the correct exports', (done) -> a.verify expectedExports, '../lib/shared', done
 

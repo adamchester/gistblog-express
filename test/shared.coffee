@@ -15,6 +15,7 @@ describe 'shared', ->
 	indexViewModelFields = baseViewModelFields.concat ['posts']
 	twitterViewModelFields = baseViewModelFields
 	readingTagViewModelFields = baseViewModelFields.concat ['items', 'tag']
+	readingListViewModelFields = baseViewModelFields.concat [ 'items' ]
 
 	# mock data
 	validPostId1 = 2944558
@@ -34,13 +35,12 @@ describe 'shared', ->
 		getIndexViewModel: 			[ a.MustCallbackWithFields(indexViewModelFields) ]
 		getPostViewModel: 			[ a.MustCallback(validPostId1) ]
 		getTwitterViewModel:			[ a.MustCallbackWithFields(twitterViewModelFields) ]
-		getReadingTagViewModel:		[ a.MustCallbackWithFields( ['tag', 'items'] , 'abc') ]
-		getReadingListViewModel:		[ a.MustCallback() ]
+		getReadingTagViewModel:		[ a.MustCallbackWithFields( readingTagViewModelFields, 'abc') ]
+		getReadingListViewModel:		[ a.MustCallbackWithFields( readingListViewModelFields ) ]
 
 	describe 'exports', ->
 		scopes = null
-		beforeEach ->
-			scopes = th.mockGithubApis [validPostId1, validPostId2], invalidPostId
+		beforeEach -> scopes = th.mockGithubApis [validPostId1, validPostId2], invalidPostId
 		afterEach -> scopes.done()
 
 		it 'should have the correct exports', (done) -> a.verify expectedExports, '../lib/shared', done

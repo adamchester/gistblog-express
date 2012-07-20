@@ -14,13 +14,16 @@ describe 'cache', ->
 
 	describe 'exports', ->
 
-		cacheExports =
-			getOptions: [ a.ReturnValueEquals([ 'expiryMinutes', 'getLogger' ]) ]
-			getOption: [ a.ReturnValueEquals( 5.0, 'expiryMinutes' ) ]
+		publicOptionNames = [ 'expiryMinutes', 'getLogger' ]
+		defaultExpiryMinutes = 5.0
+
+		cacheAssertions =
+			getOptions: [ a.ReturnValueEquals( publicOptionNames ) ]
+			getOption: [ a.ReturnValueEquals( defaultExpiryMinutes, 'expiryMinutes' ) ]
 			setOption: [ a.IsFunction ]
 			cachify: [ a.IsFunction ]
 
-		it 'should be valid', (done) -> a.verify cacheExports, '../lib/cache', done
+		it 'should be valid', (done) -> a.verify cacheAssertions, '../lib/cache', done
 
 	describe 'option', ->
 		describe 'getLogger', ->

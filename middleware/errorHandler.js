@@ -20,6 +20,7 @@ module.exports = function errorHandler(options) {
   showMessage = options.showMessage || options.message,
   dumpExceptions = options.dumpExceptions || options.dump,
   formatUrl = options.formatUrl;
+  var _ = require('underscore');
 
   return function errorHandler(err, req, res, next) {
     res.statusCode = 500;
@@ -32,11 +33,11 @@ module.exports = function errorHandler(options) {
       }, status: 404
     });
     } else {
-      res.render('errors/500', { locals: {
-        title: 'The Server Encountered an Error',
-        error: showStack ? err : undefined
-      }, status: 500
-    });
+      res.render('errors/500', {
+          title: 'The Server Encountered an Error',
+          error: _.escape(err.stack).replace(/\n/g, '<br />'),
+          status: 500
+      });
     }
   };
 };

@@ -1,0 +1,4 @@
+./public/*
+Drupal.sublime-projectcompletions
+./views/*
+./views/mixins/*

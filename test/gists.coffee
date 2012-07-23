@@ -1,19 +1,21 @@
-gists = require '../lib/gists.js'
-assert = require 'assert'
-th = require './test_helpers'
-
 
 describe 'gists', ->
+	gists = require '../lib/gists.js'
+	assert = require 'assert'
+	th = require './test_helpers'
+	a = require './asserters'
 
 	expectedBlogPostFields = ['id', 'title', 'date', 'content_md', 'content_html', 'comment_count']
 
-	describe 'module', ->
-		it 'should export', -> assert gists isnt undefined
-		it 'should export getGistMarkdown', -> assert gists.getGistMarkdown isnt undefined
-		it 'should export getGistHtml', -> assert gists.getGistHtml isnt undefined
-		it 'should export getBlogPostsForUser', -> assert gists.getBlogPostsForUser isnt undefined
-		it 'should export getBlogPost', -> assert gists.getBlogPost isnt undefined
-		it 'should not export toBlogPost', -> assert gists.toBlogPost is undefined
+	it 'should have valid exports and stuff', (done) ->
+
+		expectations = 
+			getGistMarkdown: [ a.IsFunction ]
+			getGistHtml: [ a.IsFunction ]
+			getBlogPostsForUser: [ a.IsFunction ]
+			getBlogPost: [ a.IsFunction ]
+
+		a.verify expectations, '../lib/gists', done
 
 	describe 'method', ->
 

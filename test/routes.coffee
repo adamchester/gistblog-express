@@ -9,7 +9,7 @@ describe 'routes/', ->
 
 	expectedRouteMap =
 		about: ['/about']
-		global: ['/403', '/404', '/500']
+		global: ['/403', '/404'] # note: 500 is handled via middleware/errorHandler.js
 		posts: ['/', '/posts/:id', '/twitter']
 		reading: ['/reading', '/reading/tags/:tagName']
 

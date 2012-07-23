@@ -50,9 +50,11 @@ dump = (obj) ->
 	else JSON.stringify(obj)
 
 
-# define some classes
-module.exports.Asserter = class Asserter
-
+###*
+ * The base class for all assertions. Override @assertObj (or @execute if you
+ * to use the the callback) and optionally @toString.
+###
+class Asserter
 	constructor: () ->
 		@descr = this.constructor.name
 
@@ -264,14 +266,17 @@ class AssertReturnsFields extends AssertIsFunction
 # see http://stackoverflow.com/questions/1058427/how-to-detect-if-a-variable-is-an-array
 isNonEmptyArrayLike = (obj) ->
 	try # don't bother with `typeof` - just access `length` and `catch`
-		return (obj.length > 0) and ('0' of Object(obj))
+		(obj.length > 0) and ('0' of Object(obj))
 	catch e
-		return false
+		false
 
 
 # put some syntax sugar on it
 module.exports = a =
-	dump: (obj) -> dump(obj)
+	Asserter: () -> Asserter # export the base class
+	dump: (obj) -> dump(obj) # helper to stringify an object
+	
+	# Assertions
 	Exists: new AssertExists()
 	IsFunction: new AssertIsFunction()
 	IsObject: new AssertIsObject()
@@ -298,96 +303,3 @@ module.exports = a =
 		module = if isRequirePath then require(moduleOrRequirePath) else moduleOrRequirePath
 		Asserter.verifyAll assertions, module, done
 
-# describe how they should work
-describe 'asserters.verify', ->
-
-	# describe a mock module that 'exports' various things
-	myModule =
-		export1: {a:'a', b:'b'}
-		export2: i:'am', one:'object'
-		funcWithNoArgs: (callback) -> callback(null, "with", "some", "extra")
-		funcWithOneArg: (input, callback) ->
-			assert _.isFunction(callback), "callback must be a function"
-			callback(new Error("error") if input is "error")
-		funcWithTwoArgs: (input1, input2, callback) ->
-			assert _.isFunction(callback), "callback must be a function"
-			if input1 is "error" or input2 is "error"
-				callback(new Error("error"))
-			else 
-				callback(null, "with", "some", "extra")
-
-	# describe the assertions that need to be performed
-	myAsserts =
-		abc: [  ] # abc doesn't exist, but no asserter requires it
-		# abc2: [ a.Exists ] # this would fail
-		# def: [ new AssertExists() ] # def doesn't exist
-		export1: [ a.IsObject, a.HasFields(['a', 'b']) ]
-		export2: [ a.IsObject, a.HasFields(['i', 'one']) ]
-		funcWithNoArgs: [ a.MustCallback() ]
-		funcWithTwoArgs: [ a.MustCallbackError('success', 'error'), a.MustCallback('success', 'success') ]
-		funcWithOneArg: [ a.MustCallbackError('error'), a.MustCallback('success') ]
-
-	it 'should get no errors when verified', (done) -> a.verify myAsserts, myModule, done
-
-	asserter = null
-	describe 'AssertHasFields', ->
-		describe 'given AssertHasFields([a])', ->
-			beforeEach -> asserter = new AssertHasFields(['a'])
-			it 'should not assert when the field exists', (done) -> verifyDoesNotAssert 'exp', asserter, {a:'a'}, done
-			it 'should assert when the field does not exist', (done) -> verifyDoesAssert 'exp', asserter, {b:'b'}, done
-			it 'should give the correct assertion mesage', (done) ->
-				expectedMessage = "expected field 'a' to be defined on export 'exp': {\"b\":\"b\"}"
-				verifyAssertionMessage 'exp', asserter, {b:'b'}, expectedMessage, done
-
-	describe 'AssertIsFunction', ->
-		beforeEach -> asserter = new AssertIsFunction()
-		it 'should not assert with given a function', (done) -> verifyDoesNotAssert 'exp', asserter, (() ->), done
-		it 'should assert when given an object', (done) -> verifyDoesAssert 'exp', asserter, {a:'b'}, done
-		it 'should give the correct assertion message when given undefined', (done) ->
-			expectedMessage = "expected export 'exp' to be defined"
-			verifyAssertionMessage 'exp', asserter, undefined, expectedMessage, done
-
-		it 'should give the correct assertion message when given an object literal', (done) ->
-			expectedMessage = "expected 'exp' to be a function: ({\"b\":\"b\"})"
-			verifyAssertionMessage 'exp', asserter, {b:'b'}, expectedMessage, done
-
-	describe 'AssertIsObject', ->
-		beforeEach -> asserter = new AssertIsObject()
-		it 'should not assert when given an object literal', (done) -> verifyDoesNotAssert 'exp', asserter, ({}), done
-		it 'should not assert when given a function', (done) -> verifyDoesNotAssert 'exp', asserter, (() ->), done
-
-		it 'should assert when given a string', (done) -> verifyDoesAssert 'exp', asserter, 'abc', done
-		it 'should assert when given a number', (done) -> verifyDoesAssert 'exp', asserter, 123, done
-
-		it 'should give the correct assertion mesage', (done) ->
-			expectedMessage = "expected 'exp' to be an object, instead got: \"abc\""
-			verifyAssertionMessage 'exp', asserter, 'abc', expectedMessage, () ->
-				expectedMessage = "expected 'exp' to be an object, instead got: 123"
-				verifyAssertionMessage 'exp', asserter, 123, expectedMessage, done
-
-
-# helper methods to verify asserters
-verifyDoesAssert = (exportName, theAsserter, theInput, done) ->
-	executeArgs = {forFieldName: exportName, onObject: theInput}
-
-	theCodeThatShouldThrow = -> 
-		theAsserter.execute executeArgs, -> assert.fail # we shouldn't get to the callback as the assert should happen first
-
-	assert.throws theCodeThatShouldThrow, assert.AssertionError
-	done()
-
-verifyDoesNotAssert = (exportName, theAsserter, theInput, done) ->
-	assert.doesNotThrow ->
-		theAsserter.execute {forFieldName: exportName, onObject: theInput}, done
-
-verifyAssertionMessage = (exportName, theAsserter, theInput, message, done) ->
-	try
-		theAsserter.execute {forFieldName: exportName, onObject: theInput}, (err) ->
-			msg = "the asserter (#{theAsserter.descr}) did not report an error in the callback"
-			throw new Error(msg) if not err
-	catch error
-		if error instanceof assert.AssertionError
-			assert.equal error.message, message
-			done()
-		else
-			throw error

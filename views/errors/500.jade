@@ -1,2 +1,11 @@
+doctype 5
+html
+  head
+    title= title
+  body
+    h1=title
+    p
+      | We're terribly sorry about this, it's really quite embarassing. We're quite flumoxed actually.
 
-h1 internal server error
+    if error
+      p.error!= error

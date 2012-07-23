@@ -35,9 +35,9 @@ html
 					block content
 				div.span3
 					mixin sidebar(shared.topLevelMenuItems, shared.readingListTags)
-
-		script(type='text/javascript', src='/javascripts/underscore-min.js')
-		script(type='text/javascript', src='/javascripts/jquery.min.js')
-		script(type='text/javascript', src='/javascripts/bootstrap.min.js')
-		script(type='text/javascript', src='/javascripts/jquery.min.js')
+		block body_scripts
+			script(type='text/javascript', src='/javascripts/underscore-min.js')
+			script(type='text/javascript', src='/javascripts/jquery.min.js')
+			script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+			script(type='text/javascript', src='/javascripts/jquery.min.js')
 

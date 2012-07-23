@@ -78,7 +78,7 @@ module.exports.Asserter = class Asserter
 		# console.log (candidate instanceof Asserter)
 		if not (candidate instanceof Asserter)
 			sample = "{ fieldName: [ a.NoArgs, a.WithArgs('a','b') ] }"
-			msg = util.format('Expected an instance of Asserter. Assertions should look like this: %s\nDid you you forget () ?\nInstead of an Asserter instance, we found: %j', sample, candidate)
+			msg = util.format('Expected an instance of Asserter. Assertions should look like this: %s\nDid you you forget () ?\nInstead of an Asserter instance, we found: %s', sample, dump(candidate))
 			throw new Error(msg)
 
 	###*
@@ -131,7 +131,7 @@ class AssertIsFunction extends AssertExists
 
 class AssertReturnValueEquals extends AssertIsFunction
 	constructor: (@expectedResult, @fnArgs) -> super()
-	toString: (options) -> if @expectedResult then "#{super(options)} (expects: #{a.dump(@expectedResult)}" else super(obj)
+	toString: (options) -> if @expectedResult then "#{super(options)} (expects: #{dump(@expectedResult)}" else super(obj)
 	assertObj: (options) ->
 		super(options)
 		fn = options.onObject
@@ -165,7 +165,7 @@ class AssertMustCallback extends AssertMustCallbackBase
 	constructor: (argsArray) -> super(argsArray)
 	execute: (options, cb) ->
 		@executeAssertOnCallback options, (error, results...) ->
-			assert not error, "expected method #{options.forFieldName} to callback with no error, but got #{error}"
+			assert not error, "expected method #{options.forFieldName} to callback with no error, but got #{dump(error)}"
 			cb.apply(this, [error].concat(results))
 
 

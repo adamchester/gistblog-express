@@ -19,6 +19,7 @@ describe 'shared', ->
 
 	# mock data
 	validPostId1 = 2944558
+	validPostId1AsString = "#{validPostId1}"
 	validPostId2 = 2861047
 	invalidPostId = 9999999999
 
@@ -33,7 +34,7 @@ describe 'shared', ->
 		getSharedLayoutViewModel: 	[ a.MustCallback(s.topLevelPages.index) ]
 		getAboutViewModel: 			[ a.MustCallbackWithFields(baseViewModelFields) ]
 		getIndexViewModel: 			[ a.MustCallbackWithFields(indexViewModelFields) ]
-		getPostViewModel: 			[ a.MustCallback(validPostId1) ]
+		getPostViewModel: 			[ a.MustCallback(validPostId1), a.MustCallback(validPostId1AsString) ]
 		getTwitterViewModel:			[ a.MustCallbackWithFields(twitterViewModelFields) ]
 		getReadingTagViewModel:		[ a.MustCallbackWithFields( readingTagViewModelFields, 'abc') ]
 		getReadingListViewModel:		[ a.MustCallbackWithFields( readingListViewModelFields ) ]

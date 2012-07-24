@@ -1,0 +1,7 @@
+
+mixin tag_cloud(tags)
+	p.tag-cloud
+		each tag in tags
+			a(href=tag.href, class=tag.classes)
+				=tag.name
+			| 

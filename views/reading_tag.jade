@@ -4,8 +4,12 @@ include mixins/reading_list_table
 
 block content
 	h1= title
-	p
+	div
 		| This page is a list of links / pages that I have tagged with the tag '
 		=tag.name
 		|'.
+		p
+			|You may also go 
+			a(href='/reading')| back to the full reading list
+			|.
 	mixin reading_list_table(items)

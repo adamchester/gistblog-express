@@ -4,6 +4,7 @@ include reading_list_tag
 mixin reading_list_table(items)
 	table.table.table-striped.table-bordered.table-condensed
 		thead: tr
+			th.hide ID
 			th Date Added 
 				i.icon-time
 			th Link 
@@ -13,6 +14,7 @@ mixin reading_list_table(items)
 		tbody
 			each item in items
 				tr
+					td.hide= item.id
 					- var dteString = item.time_added.toDateString()
 					- dteString = dteString.substring(3, dteString.length)
 					td= dteString

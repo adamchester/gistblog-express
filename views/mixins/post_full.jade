@@ -1,7 +1,6 @@
 include post_summary
 
-mixin post_full(post)
-	div.well
-		mixin post_summary(post)
-		p.blog-post
-			!{post.content_html}
+mixin post_full(post, usePostLinks)
+	div.blog-post(data-post-id=post.id)
+		mixin post_summary(post, usePostLinks)
+		!{post.content_html}

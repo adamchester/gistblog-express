@@ -9,6 +9,15 @@ describe 'reading list', ->
 	pkt = require './assets/pocket'
 	a = require './asserters'
 
+	it 'should not have any duplicate IDs', (done) ->
+		rl.getReadingList (err, result) ->
+			idField = (listItem) -> listItem.id
+			lengthGreaterThan1 = (group) -> group.length > 1
+			grouped = 	_.chain(result).toArray().groupBy(idField).filter(lengthGreaterThan1).value()
+			# console.log grouped if grouped.length > 0
+			assert.equal grouped.length, 0, "expected no duplicates IDs after getting the reading list"
+			done()
+
 	readingListItemFields = ['id', 'title', 'url', 'tags', 'time_added', 'time_updated', 'isRead']
 	tagFields = ['name', 'href']
 	validTagName = 'abc'
@@ -25,4 +34,3 @@ describe 'reading list', ->
 		getMostRecentlyAddedDate: []
 
 	it 'should have the correct exports', (done) -> a.verify expectedExports, '../lib/reading_list', done
-

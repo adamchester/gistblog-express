@@ -1,7 +1,7 @@
 
 include twitter_follow_button
 include twitter_profile_widget
-include reading_list_tag_list
+include tag_cloud
 
 mixin sidebar(links, tags)
 	//- div.well.sidebar-nav
@@ -13,7 +13,7 @@ mixin sidebar(links, tags)
 		ul.nav.nav-list
 			li.nav-header Reading List Tags
 			li
-				mixin reading_list_tag_list(tags)
+				mixin tag_cloud(tags)
 
 	div.well.sidebar-nav
 		section.sidebar-tweets

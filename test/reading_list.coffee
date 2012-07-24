@@ -14,15 +14,15 @@ describe 'reading list', ->
 	validTagName = 'abc'
 
 	expectedExports =
-		getReadingList:					[ a.MustCallbackWithFieldsForEach( readingListItemFields ) ]
-		getTags:						[ a.MustCallbackWithFieldsForEach( tagFields ) ]
-		getTag:							[ a.MustCallbackWithFields(tagFields, validTagName) ]
-		getReadingListForTag:			[ a.MustCallbackWithFieldsForEach( readingListItemFields , validTagName) ]
-		toTagItem:						[  ]
-		extractTags:					[ ]
-		toReadingListItem:				[ ]
-		toReadingListItems:			[ ]
-		getMostRecentlyAddedDate:	[ ]
+		getReadingList: [ a.MustCallbackWithFieldsForEach( readingListItemFields ) ]
+		getTags: [ a.MustCallbackWithFieldsForEach( tagFields ) ]
+		getTag:  [ a.MustCallbackWithFields(tagFields, validTagName) ]
+		getReadingListForTag: [ a.MustCallbackWithFieldsForEach( readingListItemFields , validTagName) ]
+		toTagItem: []
+		extractTags: []
+		toReadingListItem: []
+		toReadingListItems: []
+		getMostRecentlyAddedDate: []
 
 	it 'should have the correct exports', (done) -> a.verify expectedExports, '../lib/reading_list', done
 

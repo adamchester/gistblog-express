@@ -1,12 +1,29 @@
 {
     "status": 1,
     "list": {
+        "7499": {
+            "item_id": "7499",
+            "title": "Authentic Jobs ~ Full-time and freelance job opportunities for web, design,",
+            "url": "http://www.authenticjobs.com/",
+            "time_updated": "1341988693",
+            "time_added": "1341988686",
+            "state": "0",
+            "tags": "jobs"
+        },
         "346095": {
             "item_id": "346095",
             "title": "Closure (computer science) - Wikipedia, the free encyclopedia",
             "url": "http://en.wikipedia.org/wiki/Closure_(computer_science)",
-            "time_updated": "1341646411",
+            "time_updated": "1341843605",
             "time_added": "1341646411",
+            "state": "0"
+        },
+        "909530": {
+            "item_id": "909530",
+            "title": "Tag cloud - Wikipedia, the free encyclopedia",
+            "url": "http://en.wikipedia.org/wiki/Tag_cloud",
+            "time_updated": "1343036496",
+            "time_added": "1342930327",
             "state": "0"
         },
         "1026267": {
@@ -18,6 +35,40 @@
             "state": "0",
             "tags": "javascript"
         },
+        "1438328": {
+            "item_id": "1438328",
+            "title": "GoogleReaderAPI - pyrfeed - This is a RSS/Atom Reader and Framework. It use",
+            "url": "http://code.google.com/p/pyrfeed/wiki/GoogleReaderAPI",
+            "time_updated": "1342154071",
+            "time_added": "1342154063",
+            "state": "0",
+            "tags": "api,reader"
+        },
+        "1699805": {
+            "item_id": "1699805",
+            "title": "Tabs versus Spaces",
+            "url": "http://www.jwz.org/doc/tabs-vs-spaces.html",
+            "time_updated": "1342963130",
+            "time_added": "1342952768",
+            "state": "0"
+        },
+        "2554530": {
+            "item_id": "2554530",
+            "title": "James Shore: The Decline and Fall of Agile",
+            "url": "http://jamesshore.com/Blog/The-Decline-and-Fall-of-Agile.html",
+            "time_updated": "1342856813",
+            "time_added": "1342856807",
+            "state": "0",
+            "tags": "agile"
+        },
+        "11195318": {
+            "item_id": "11195318",
+            "title": "WordPress › SyntaxHighlighter Evolved « WordPress Plugins",
+            "url": "http://wordpress.org/extend/plugins/syntaxhighlighter/",
+            "time_updated": "1342757849",
+            "time_added": "1342757849",
+            "state": "0"
+        },
         "15042621": {
             "item_id": "15042621",
             "title": "zen-coding - Set of plugins for HTML and CSS hi-speed coding - Google Proje",
@@ -26,6 +77,23 @@
             "time_added": "1341659859",
             "state": "0",
             "tags": "css,html,web"
+        },
+        "18653844": {
+            "item_id": "18653844",
+            "title": "highlight.js: description",
+            "url": "http://softwaremaniacs.org/soft/highlight/en/description/",
+            "time_updated": "1342847959",
+            "time_added": "1342847959",
+            "state": "0"
+        },
+        "43035184": {
+            "item_id": "43035184",
+            "title": "Express - node web framework",
+            "url": "http://expressjs.com/guide.html",
+            "time_updated": "1342165496",
+            "time_added": "1342165496",
+            "state": "0",
+            "tags": "abc,javascript,nodejs"
         },
         "58407256": {
             "item_id": "58407256",
@@ -36,14 +104,41 @@
             "state": "0",
             "tags": "async,javascript"
         },
+        "65803219": {
+            "item_id": "65803219",
+            "title": "Essential Node.js patterns and snippets « Mixu's tech blog",
+            "url": "http://blog.mixu.net/2011/02/02/essential-node-js-patterns-and-snippets/",
+            "time_updated": "1342246011",
+            "time_added": "1342246001",
+            "state": "0",
+            "tags": "nodejs,patterns"
+        },
+        "66067556": {
+            "item_id": "66067556",
+            "title": "coolaj86/futures",
+            "url": "https://github.com/coolaj86/futures/",
+            "time_updated": "1341923931",
+            "time_added": "1341923926",
+            "state": "0",
+            "tags": "async,javascript"
+        },
         "69000602": {
             "item_id": "69000602",
             "title": "Modules · joyent/node Wiki",
             "url": "https://github.com/joyent/node/wiki/modules#wiki-templating",
-            "time_updated": "1341364091",
-            "time_added": "1341364084",
+            "time_updated": "1342147700",
+            "time_added": "1342147690",
             "state": "0",
-            "tags": "javascript,nodejs"
+            "tags": "javascript,links,nodejs"
+        },
+        "74123463": {
+            "item_id": "74123463",
+            "title": "Getting Started – Git-Flow « Some thoughts, ideas and fun!!!",
+            "url": "http://yakiloo.com/getting-started-git-flow/",
+            "time_updated": "1342488407",
+            "time_added": "1342488401",
+            "state": "0",
+            "tags": "git"
         },
         "77193188": {
             "item_id": "77193188",
@@ -63,6 +158,24 @@
             "state": "0",
             "tags": "async,javascript"
         },
+        "78919324": {
+            "item_id": "78919324",
+            "title": "javascript - What are the pros and cons of Coffeescript? - Programmers",
+            "url": "http://programmers.stackexchange.com/questions/72569/what-are-the-pros-and-cons-of-coffeescript",
+            "time_updated": "1342830415",
+            "time_added": "1342830406",
+            "state": "0",
+            "tags": "coffeescript"
+        },
+        "88378299": {
+            "item_id": "88378299",
+            "title": "Jonathan Oliver | Transcending the POST, Validate, Redirect Pattern",
+            "url": "http://blog.jonathanoliver.com/2011/06/transcending-the-post-validate-redirect-pattern/",
+            "time_updated": "1342072683",
+            "time_added": "1341905521",
+            "state": "0",
+            "tags": "aspnet,web"
+        },
         "93040496": {
             "item_id": "93040496",
             "title": "Tweet Button | Twitter Developers",
@@ -71,6 +184,58 @@
             "time_added": "1341356152",
             "state": "0",
             "tags": "web"
+        },
+        "104011647": {
+            "item_id": "104011647",
+            "title": "Useful Node.js Tools, Tutorials And Resources | Smashing Coding",
+            "url": "http://coding.smashingmagazine.com/2011/09/16/useful-node-js-tools-tutorials-and-resources/",
+            "time_updated": "1342147318",
+            "time_added": "1342147302",
+            "state": "0",
+            "tags": "links,nodejs"
+        },
+        "109680782": {
+            "item_id": "109680782",
+            "title": "wuub/SublimeREPL",
+            "url": "https://github.com/wuub/SublimeREPL",
+            "time_updated": "1342997214",
+            "time_added": "1342997213",
+            "state": "0"
+        },
+        "116646974": {
+            "item_id": "116646974",
+            "title": "",
+            "url": "http://programming-motherfucker.com/become.html",
+            "time_updated": "1342784942",
+            "time_added": "1342784942",
+            "state": "0"
+        },
+        "123431546": {
+            "item_id": "123431546",
+            "title": "Git for Windows tip: Setting shell aliases with msysgit | danlimerick",
+            "url": "http://danlimerick.wordpress.com/2011/06/10/git-for-windows-tip-setting-shell-aliases-with-msysgit/",
+            "time_updated": "1342739586",
+            "time_added": "1342739573",
+            "state": "0",
+            "tags": "git,windows"
+        },
+        "124083979": {
+            "item_id": "124083979",
+            "title": "7. Control flow in Node.js - Mixu's Node book",
+            "url": "http://book.mixu.net/ch7.html",
+            "time_updated": "1342340147",
+            "time_added": "1341908453",
+            "state": "0",
+            "tags": "async,nodejs"
+        },
+        "127592698": {
+            "item_id": "127592698",
+            "title": "Orthogonal Code | Jeremy D. Miller",
+            "url": "http://codebetter.com/jeremymiller/2007/01/09/orthogonal-code/",
+            "time_updated": "1342484838",
+            "time_added": "1342484817",
+            "state": "0",
+            "tags": "principles"
         },
         "129851512": {
             "item_id": "129851512",
@@ -99,6 +264,15 @@
             "state": "0",
             "tags": "mvc"
         },
+        "151697349": {
+            "item_id": "151697349",
+            "title": "Git tips and tricks « Mixu's tech blog",
+            "url": "http://blog.mixu.net/2012/04/06/git-tips-and-tricks/",
+            "time_updated": "1342245934",
+            "time_added": "1342245924",
+            "state": "0",
+            "tags": "git"
+        },
         "154741882": {
             "item_id": "154741882",
             "title": "Pocket | Portal",
@@ -115,6 +289,14 @@
             "time_added": "1341491929",
             "state": "0",
             "tags": "ntmove"
+        },
+        "165045454": {
+            "item_id": "165045454",
+            "title": "Sublime Text 2 tips for Python and web developers",
+            "url": "http://opensourcehacker.com/2012/05/11/sublime-text-2-tips-for-python-and-web-developers/",
+            "time_updated": "1342693098",
+            "time_added": "1342662109",
+            "state": "0"
         },
         "168561789": {
             "item_id": "168561789",
@@ -190,7 +372,7 @@
             "item_id": "188322326",
             "title": "javascript - Cache pattern with callbacks - Stack Overflow",
             "url": "http://stackoverflow.com/questions/7404850/cache-pattern-with-callbacks",
-            "time_updated": "1341621451",
+            "time_updated": "1342877424",
             "time_added": "1341529389",
             "state": "0",
             "tags": "cache,javascript"
@@ -203,8 +385,175 @@
             "time_added": "1341642872",
             "state": "0",
             "tags": "javascript"
+        },
+        "189097864": {
+            "item_id": "189097864",
+            "title": "",
+            "url": "http://gigaom.com/cloud/why-the-days-are-numbered-for-hadoop-as-we-know-it/",
+            "time_updated": "1341881406",
+            "time_added": "1341881406",
+            "state": "0"
+        },
+        "189672655": {
+            "item_id": "189672655",
+            "title": "",
+            "url": "https://gist.github.com/3069556",
+            "time_updated": "1341820075",
+            "time_added": "1341820075",
+            "state": "0"
+        },
+        "190056578": {
+            "item_id": "190056578",
+            "title": "Jade template for RSS 2.0 - Mike Valstar - Programming & Web Development",
+            "url": "http://mikevalstar.com/Blog/109/Jade_template_for_RSS_20",
+            "time_updated": "1341877200",
+            "time_added": "1341877193",
+            "state": "0",
+            "tags": "jade,javascript,rss"
+        },
+        "190100374": {
+            "item_id": "190100374",
+            "title": "CoffeeScript, When to use fat arrow (=>) over arrow (->) and vice versa - S",
+            "url": "http://stackoverflow.com/questions/8965855/coffeescript-when-to-use-fat-arrow-over-arrow-and-vice-versa",
+            "time_updated": "1341885649",
+            "time_added": "1341885644",
+            "state": "0",
+            "tags": "coffeescript"
+        },
+        "190483380": {
+            "item_id": "190483380",
+            "title": "App Guide: iOS scanning apps reviewed",
+            "url": "http://www.macworld.com/appguide/browse.html?collection=12766",
+            "time_updated": "1342146916",
+            "time_added": "1342013210",
+            "state": "0"
+        },
+        "191762058": {
+            "item_id": "191762058",
+            "title": "google reader api for nodejs — Gist",
+            "url": "https://gist.github.com/2034195",
+            "time_updated": "1342152116",
+            "time_added": "1342152114",
+            "state": "0"
+        },
+        "191828384": {
+            "item_id": "191828384",
+            "title": "Tobbe/googlereaderauth",
+            "url": "https://github.com/Tobbe/googlereaderauth",
+            "time_updated": "1342165292",
+            "time_added": "1342165287",
+            "state": "0",
+            "tags": "auth,reader"
+        },
+        "192927746": {
+            "item_id": "192927746",
+            "title": "Cord Cutting Is The New File-Sharing",
+            "url": "http://feed.torrentfreak.com/~r/Torrentfreak/~3/cnGSoPGH9RQ/",
+            "time_updated": "1342412624",
+            "time_added": "1342412624",
+            "state": "0"
+        },
+        "193670172": {
+            "item_id": "193670172",
+            "title": "javascript - How to detect if a variable is an array - Stack Overflow",
+            "url": "http://stackoverflow.com/questions/1058427/how-to-detect-if-a-variable-is-an-array",
+            "time_updated": "1342519910",
+            "time_added": "1342519906",
+            "state": "0",
+            "tags": "javascript"
+        },
+        "194295197": {
+            "item_id": "194295197",
+            "title": "pour/pour.coffee at master · timcameronryan/pour",
+            "url": "https://github.com/timcameronryan/pour/blob/master/pour.coffee",
+            "time_updated": "1342620849",
+            "time_added": "1342620813",
+            "state": "0",
+            "tags": "coffeescript,dsl,testing"
+        },
+        "194781210": {
+            "item_id": "194781210",
+            "title": "ADSL2  Broadband for CASUARINA (NT) Exchange. Search and compare broadband ",
+            "url": "http://www.adsl2exchanges.com.au/viewexchange.php?Exchange=CSUF",
+            "time_updated": "1342701359",
+            "time_added": "1342701356",
+            "state": "0"
+        },
+        "194811856": {
+            "item_id": "194811856",
+            "title": "Want To Build Win8/WinJS Apps? You Need To Understand Promises.",
+            "url": "http://lostechies.com/derickbailey/2012/07/19/want-to-build-win8winjs-apps-you-need-to-understand-promises/",
+            "time_updated": "1342742708",
+            "time_added": "1342742708",
+            "state": "0"
+        },
+        "195907860": {
+            "item_id": "195907860",
+            "title": "",
+            "url": "http://stuffpetedoes.blogspot.com.au/2012/07/grunt-watch-and-nodejs-require-cache.html?utm_source=twitterfeed&utm_medium=twitter",
+            "time_updated": "1342905451",
+            "time_added": "1342905431",
+            "state": "0"
+        },
+        "195921499": {
+            "item_id": "195921499",
+            "title": "troyharvey/SublimeLinter",
+            "url": "https://github.com/troyharvey/SublimeLinter",
+            "time_updated": "1342908742",
+            "time_added": "1342908742",
+            "state": "0"
+        },
+        "196040691": {
+            "item_id": "196040691",
+            "title": "docco — Gist",
+            "url": "https://gist.github.com/1476877",
+            "time_updated": "1342940085",
+            "time_added": "1342940084",
+            "state": "0"
+        },
+        "196263203": {
+            "item_id": "196263203",
+            "title": "",
+            "url": "http://arstechnica.com/information-technology/2012/07/ninja-power-open-source-html5-toolset-hopes-to-unleash-the-web/",
+            "time_updated": "1343010950",
+            "time_added": "1343010950",
+            "state": "0"
+        },
+        "196359786": {
+            "item_id": "196359786",
+            "title": "An argument against subclassing Error",
+            "url": "http://bjb.io/development/2012/05/06/an-argument-against-subclassing-error.html",
+            "time_updated": "1343008777",
+            "time_added": "1343008770",
+            "state": "0",
+            "tags": "javascript,nodejs"
+        },
+        "196411692": {
+            "item_id": "196411692",
+            "title": "Make Your Users Do the Work",
+            "url": "http://techcrunch.com/2012/07/22/make-your-users-do-the-work/",
+            "time_updated": "1343037065",
+            "time_added": "1343037065",
+            "state": "0"
+        },
+        "196513346": {
+            "item_id": "196513346",
+            "title": "",
+            "url": "https://raw.github.com/liammclennan/gistblog/ab3c7a4222c845ee3701174fde24e22199332ca0/lib/markdown.js",
+            "time_updated": "1343039306",
+            "time_added": "1343039306",
+            "state": "0"
+        },
+        "196814633": {
+            "item_id": "196814633",
+            "title": "NobleJS/WinningJS-build",
+            "url": "https://github.com/NobleJS/WinningJS-build",
+            "time_updated": "1343083225",
+            "time_added": "1343083216",
+            "state": "0",
+            "tags": "build,javascript,nodejs"
         }
     },
-    "since": 1341661531,
+    "since": 1343083225,
     "complete": 0
 }

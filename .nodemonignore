@@ -2,3 +2,4 @@
 Drupal.sublime-projectcompletions
 ./views/*
 ./views/mixins/*
+./.git/*

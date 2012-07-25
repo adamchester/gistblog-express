@@ -9,6 +9,12 @@ describe 'reading list', ->
 	pkt = require './assets/pocket'
 	a = require './asserters'
 
+	describe '#getTags()', ->
+		it 'should return tags in alphabetical order', ->
+			rl.getTags (err, result) ->
+				sorted = _.chain(result).clone().sortBy((r) -> r.name).value()
+				assert.equal JSON.stringify(result), JSON.stringify(sorted)
+
 	it 'should not have any duplicate IDs', (done) ->
 		rl.getReadingList (err, result) ->
 			idField = (listItem) -> listItem.id

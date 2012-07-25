@@ -21,11 +21,8 @@ mixin twitter_profile_widget(username, width, height, type, title)
 		interval: 3000,
 		width: '#{width}',
 		height: '#{height}',
-		theme: {
-			shell: { background: 'whiteSmoke', color: '#000000'}
-			, tweets: {background: 'whiteSmoke', color: '#000000', links: '#08C'} 
-		}
-		, features: {
+		theme: { shell: { background: 'transparent', color: 'black' }, tweets: {background: 'transparent' } },
+		features: {
 			scrollbar: false
 			, loop: true
 			, live: true

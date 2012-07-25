@@ -1,5 +1,4 @@
-./public/*
-Drupal.sublime-projectcompletions
-./views/*
-./views/mixins/*
-./.git/*
+./Drupal.sublime-projectcompletions
+/.git/*
+/public/*
+*.css

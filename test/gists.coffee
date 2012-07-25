@@ -4,6 +4,7 @@ describe 'gists', ->
 	assert = require 'assert'
 	th = require './test_helpers'
 	a = require './asserters'
+	request = require 'request'
 
 	expectedBlogPostFields = ['id', 'title', 'date', 'content_md', 'content_html', 'comment_count']
 

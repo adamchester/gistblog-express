@@ -28,7 +28,7 @@ describe 'shared', ->
 		topLevelPages: 					[ a.IsObject, a.HasFieldsOfEach(topLevelPageFields) ]
 		isTopLevelPage: 				[ a.IsFunction ] # todo: bother doing this?
 		ViewModel:						[ a.ReturnsFields(baseViewModelFields, 'myTitle', 'myPageTemplateName') ] #todo check fields
-		SharedLayoutViewModel:		[ a.ReturnsFields(sharedViewModelFields, s.topLevelPages.index, {}) ] #todo check fields
+		SharedLayoutViewModel:		[ a.ReturnsFields(sharedViewModelFields, s.topLevelPages.index, ['tag1', 'tag2'], [{ id:1 }] ) ]
 
 		# todo sharedViewModelFields, topLevelMenuItemFields, readingListTagFields
 		getSharedLayoutViewModel: 	[ a.MustCallback(s.topLevelPages.index) ]

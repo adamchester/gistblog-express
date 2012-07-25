@@ -3,12 +3,18 @@ include twitter_follow_button
 include twitter_profile_widget
 include tag_cloud
 
-mixin sidebar(links, tags)
-	//- div.well.sidebar-nav
-	//- 	ul.nav.nav-list
-	//- 		li.nav-header Navigation
-	//- 		each link in links
-	//- 			li(class=link.classes): a(href=link.href)= link.text
+mixin sidebar(links, tags, recentPosts)
+	div.well.sidebar-nav
+		ul.nav.nav-list
+			li.nav-header Recent posts
+			each post in recentPosts
+				li(class=post.classes)
+					.well-small
+						a(href=post.url)= post.title
+						| 
+						- var dteString = post.date.toDateString()
+						- dteString = dteString.substring(4, dteString.length)
+						span.label.float-left= 'on ' + dteString
 	div.well.sidebar-nav
 		ul.nav.nav-list
 			li.nav-header Reading List Tags

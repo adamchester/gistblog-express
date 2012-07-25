@@ -1,0 +1,8 @@
+extends layout
+
+include mixins/post_full
+
+block content
+  each post in posts
+    mixin post_full(post, true)
+

@@ -16,8 +16,10 @@ describe 'shared', ->
 	twitterViewModelFields = baseViewModelFields
 	readingTagViewModelFields = baseViewModelFields.concat ['items', 'tag']
 	readingListViewModelFields = baseViewModelFields.concat [ 'items' ]
+	postsForTagFields = baseViewModelFields.concat ['posts']
 
 	# mock data
+	validTagName1 = 'nodejs'
 	validPostId1 = 2944558
 	validPostId1AsString = "#{validPostId1}"
 	validPostId2 = 2861047
@@ -31,6 +33,7 @@ describe 'shared', ->
 		SharedLayoutViewModel:		[ a.ReturnsFields(sharedViewModelFields, s.topLevelPages.index, ['tag1', 'tag2'], [{ id:1 }] ) ]
 
 		# todo sharedViewModelFields, topLevelMenuItemFields, readingListTagFields
+		getPostsForTagViewModel:		[ a.MustCallbackWithFields(postsForTagFields, validTagName1)]
 		getSharedLayoutViewModel: 	[ a.MustCallback(s.topLevelPages.index) ]
 		getAboutViewModel: 			[ a.MustCallbackWithFields(baseViewModelFields) ]
 		getIndexViewModel: 			[ a.MustCallbackWithFields(indexViewModelFields) ]

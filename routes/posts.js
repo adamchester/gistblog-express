@@ -15,6 +15,16 @@ module.exports = function(app) {
 		});
 	});
 
+	/** GET /posts/tag/:tagName
+	*/
+	app.get('/posts/tag/:tagName', l.withSharedLayout(), function postsForTag(req, res) {
+		var tagName = req.params.tagName;
+		s.getPostsForTagViewModel(tagName, function(error, viewModel) {
+			if (error) { throw error; }
+			res.render(viewModel.pageTemplateName, viewModel);
+		});
+	});
+
 	/** GET /posts/:id
 	*/
 	app.get('/posts/:id', l.withSharedLayout(), function post (req, res) {

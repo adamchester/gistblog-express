@@ -10,7 +10,7 @@ describe 'routes/', ->
 	expectedRouteMap =
 		about: ['/about']
 		global: ['/403', '/404'] # note: 500 is handled via middleware/errorHandler.js
-		posts: ['/', '/posts/:id', '/twitter']
+		posts: ['/', '/posts/tag/:tagName', '/posts/:id', '/twitter']
 		reading: ['/reading', '/reading/tags/:tagName']
 
 	it 'should map the correct routes', ->

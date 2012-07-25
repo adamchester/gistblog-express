@@ -7,16 +7,17 @@ mixin post_summary(post, linkTitle)
 	else
 		h1= post.title
 	div.post-metadata
-		span.label.label-info
-			i.icon-white.icon-tags
-			|test
+		for tag in post.tags
+			span.label.label-info
+				i.icon-white.icon-tags
+				| 
+				a.label.label-info(href='/posts/tag/' + tag)=tag
 		span.label.label-info.post-date
 			i.icon-white.icon-time
 			|posted #{post.date.toDateString()}
-		span.label.label-info
-			a.label.label-info(href=post.gist_url + "#comments")
-				i.icon-white.icon-comment
-				|view #{post.comment_count} comments on github
+		//- span.label.label-info
+		//- 	a.label.label-info(href=post.gist_url + "#comments")
+		//- 		i.icon-white.icon-comment
+		//- 		|view #{post.comment_count} comments on github
 		span.twitter_share_post
-			| 
 			mixin twitter_share_post(post)

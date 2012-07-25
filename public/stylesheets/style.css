@@ -8,7 +8,7 @@ body {
 .tag-cloud-large { font-size: x-large; }
 
 .post-metadata { margin-top: 10px; margin-bottom: 10px; font-size: small; padding-bottom: 5px !important; }
-.post-flags span { padding-right: 10px; } # spacing between labels
+.post-metadata span { padding-right: 10px; } # spacing between labels
 
 .highlight pre {
   padding: 0.5em;

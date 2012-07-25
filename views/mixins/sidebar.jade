@@ -7,14 +7,15 @@ mixin sidebar(links, tags, recentPosts)
 	div.well.sidebar-nav
 		ul.nav.nav-list
 			li.nav-header Recent posts
-			each post in recentPosts
-				li(class=post.classes)
-					.well-small
-						a(href=post.url)= post.title
-						| 
-						- var dteString = post.date.toDateString()
-						- dteString = dteString.substring(4, dteString.length)
-						span.label.float-left= 'on ' + dteString
+			ul
+				each post in recentPosts
+					li(class=post.classes)
+						.well-small
+							a(href=post.url)= post.title
+							| 
+							- var dteString = post.date.toDateString()
+							- dteString = dteString.substring(4, dteString.length)
+							span.muted= 'on ' + dteString
 	div.well.sidebar-nav
 		ul.nav.nav-list
 			li.nav-header Reading List Tags

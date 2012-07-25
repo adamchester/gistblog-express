@@ -7,18 +7,20 @@ body {
 .tag-cloud-medium { font-size: large; }
 .tag-cloud-large { font-size: x-large; }
 
-.post-metadata { margin-top: 10px; margin-bottom: 10px; font-size: small; padding-bottom: 5px !important; }
-.post-metadata span { padding-right: 10px; } # spacing between labels
+.label { white-space: nowrap; }
+.post-metadata { overflow-x: auto;  white-space: nowrap; }
+.post-metadata span { display: inline-block; margin-right: 2px; }
 
+/* code highlighting */
 .highlight pre {
+  box-shadow: 0px 0px 3px #000;
+  border-bottom: 1px solid #999;
+  background: #272822;
   padding: 0.5em;
-  color: #000;
   overflow: auto;
 }
 
-.highlight pre { box-shadow: 0px 0px 3px #000; border-bottom: 1px solid #999; }
 .highlight pre .hll { background-color: #49483e }
-.highlight pre  { background: #272822; color: #f8f8f2; }
 .highlight pre .c { color: #75715e } /* Comment */
 .highlight pre .err { color: #960050; background-color: #1e0010 } /* Error */
 .highlight pre .k { color: #66d9ef } /* Keyword */

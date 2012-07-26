@@ -7,21 +7,14 @@ body {
 .tag-cloud-medium { font-size: large; }
 .tag-cloud-large { font-size: x-large; }
 
+/* post formatting */
+.blog-post { margin-bottom: 40px; }
 i { padding-right: 2px; }
-
-.post-metadata [class^="icon-"] {
-  margin-right: 2px;
-}
 .label a { color: white; }
 .label { text-transform: uppercase; white-space: nowrap; }
-
-.post-metadata {
-  padding-bottom: 5px;
-  margin-bottom: 5px;
-  border-bottom: solid 1px;
- }
+.post-metadata [class^="icon-"] { margin-right: 2px; }
+.post-metadata { padding-bottom: 5px; margin-bottom: 5px; border-bottom: solid 1px; }
 .post-metadata span { display: inline-block; margin-right: 4px; font-size: x-small !important; }
-.twitter_share_post { }
 .post-footer { color: #999999; }
 
 /* code highlighting */

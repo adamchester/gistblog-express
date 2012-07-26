@@ -1,9 +1,10 @@
 include post_summary
 
 mixin post_full(post, usePostLinks)
-	div.well.blog-post(data-post-id=post.id)
+	div.blog-post(data-post-id=post.id)
 		mixin post_summary(post, usePostLinks)
-		!{post.content_html}
+		article.instapaper_body.post-content
+			!{post.content_html}
 		div.post-footer
 			a.muted(href=post.gist_url + '#comments')| Read comments on github
 			p| Last updated on #{post.date.toString()}

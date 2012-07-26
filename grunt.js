@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       files: ['test/**/*.coffee']
     },
     lint: {
-      files: ['grunt.js', 'app.js', 'lib/**/*.js', 'test/**/*.js']
+      files: ['grunt.js', 'app.js', 'lib/**/*.js!marked-async.js', 'test/**/*.js']
     },
     watch: {
       files: '<config:lint.files>',

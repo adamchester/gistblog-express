@@ -5,6 +5,6 @@ mixin post_full(post, usePostLinks)
 		mixin post_summary(post, usePostLinks)
 		!{post.content_html}
 		div.post-footer
-			a(href=post.gist_url + '#comments')| read comments on github
-			p| last updated on #{post.date.toString()}
+			a.muted(href=post.gist_url + '#comments')| Read comments on github
+			p| Last updated on #{post.date.toString()}
 

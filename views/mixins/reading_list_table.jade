@@ -8,7 +8,7 @@ mixin reading_list_table(items)
 			th Date Added 
 				i.icon-time
 			th Link 
-				i.icon-bookmark
+				i.icon-globe
 			th Tags 
 				i.icon-tags
 		tbody
@@ -22,4 +22,3 @@ mixin reading_list_table(items)
 					td
 						each tag in item.tags
 							mixin reading_list_tag(tag)
-							| 

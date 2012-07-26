@@ -3,28 +3,26 @@ include twitter_follow_button
 include twitter_profile_widget
 include tag_cloud
 
-mixin sidebar(links, tags, recentPosts)
+mixin sidebar(links, tags, recentPosts, postTags)
 	div.well.sidebar-nav
 		ul.nav.nav-list
 			li.nav-header Recent posts
-			ul
-				each post in recentPosts
-					li(class=post.classes)
-						.well-small
-							a(href=post.url)= post.title
-							| 
-							- var dteString = post.date.toDateString()
-							- dteString = dteString.substring(4, dteString.length)
-							span.muted= 'on ' + dteString
-	div.well.sidebar-nav
-		ul.nav.nav-list
+			each post in recentPosts
+				li(class=post.classes)
+					a(href=post.url)= post.title
+					| 
+					- var dteString = post.date.toDateString()
+					- dteString = dteString.substring(4, dteString.length)
+					span.muted= 'on ' + dteString
+			if postTags
+				li.nav-header Post topics
+				each postTag in postTags
+					li: span.label.label-success
+						i.icon-white.icon-tag
+						a(href=postTag.url)= postTag.name
 			li.nav-header Reading List Tags
 			li
 				mixin tag_cloud(tags)
-
-	div.well.sidebar-nav
-		section.sidebar-tweets
-			ul.nav.nav-list
-				li.nav-header Recent tweets
-				mixin twitter_follow_button('adamchester')
-				mixin twitter_profile_widget('adamchester')
+			li.nav-header Recent tweets
+			mixin twitter_follow_button('adamchester')
+			mixin twitter_profile_widget('adamchester')

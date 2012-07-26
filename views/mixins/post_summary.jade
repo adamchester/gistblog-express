@@ -8,16 +8,15 @@ mixin post_summary(post, linkTitle)
 		h1= post.title
 	div.post-metadata
 		for tag in post.tags
-			span.label.label-info
+			span.label.label-success
 				i.icon-white.icon-tags
-				| 
-				a.label.label-info(href='/posts/tag/' + tag)=tag
-		span.label.label-info.post-date
-			i.icon-white.icon-time
+				a(href='/posts/tag/' + tag)=tag
+		span.post-date
+			i.icon.icon-time
 			|posted #{post.date.toDateString()}
-		//- span.label.label-info
-		//- 	a.label.label-info(href=post.gist_url + "#comments")
-		//- 		i.icon-white.icon-comment
-		//- 		|view #{post.comment_count} comments on github
+		span.view-comments
+			a(href=post.gist_url + "#comments")
+				i.icon.icon-comment
+				|view #{post.comment_count} comments on github
 		span.twitter_share_post
 			mixin twitter_share_post(post)

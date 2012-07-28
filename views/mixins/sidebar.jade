@@ -16,10 +16,7 @@ mixin sidebar(links, tags, recentPosts, postTags)
 					span.muted= 'on ' + dteString
 			if postTags
 				li.nav-header Post topics
-				each postTag in postTags
-					li: span.label.label-success
-						i.icon-white.icon-tag
-						a(href=postTag.url)= postTag.name
+				li: mixin tag_cloud(postTags)
 			li.nav-header Reading List Tags
 			li
 				mixin tag_cloud(tags)

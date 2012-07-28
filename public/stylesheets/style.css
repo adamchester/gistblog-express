@@ -10,8 +10,9 @@ body {
 /* post formatting */
 .blog-post { margin-bottom: 40px; }
 i { padding-right: 2px; }
+span.label { margin-right: 2px; }
 .label a { color: white; }
-.label { text-transform: uppercase; white-space: nowrap; }
+.label { text-transform: uppercase; }
 .post-tags span { margin-right: 2px; }
 .post-metadata [class^="icon-"] { margin-right: 2px; }
 .post-metadata { padding-bottom: 5px; margin-bottom: 5px; border-bottom: solid 1px; }

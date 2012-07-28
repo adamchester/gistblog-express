@@ -7,10 +7,6 @@ mixin post_summary(post, linkTitle)
 	else
 		h1= post.title
 	div.post-metadata
-		for tag in post.tags
-			span.label.label-success
-				i.icon-white.icon-tags
-				a(href='/posts/tag/' + tag)=tag
 		span.post-date
 			i.icon.icon-time
 			|posted #{post.date.toDateString()}

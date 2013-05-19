@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A blog engine using github gists as the post store.",
   "main": "app.js",
+  "engines":{"node": "0.8.x"}
   "directories": {
     "test": "test"
   },

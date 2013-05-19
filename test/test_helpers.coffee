@@ -37,7 +37,7 @@ mockGithubApis = (validGistIds, invalidGistId) ->
 
 	allowUnmocked = false
 
-	return mockGithubApisRecorder()
+	# return mockGithubApisRecorder()
 
 	if validGistIds is undefined then validGistIds = [2944558, 2861047]
 	if invalidGistId is undefined then invalidGistId = 9999999999
@@ -72,11 +72,11 @@ mockGithubApis = (validGistIds, invalidGistId) ->
 	githubScopes = [gistsApiNock, gistsRawNock]
 	
 	logger = logging.forModule('mockGithubApis')
-	logger.info "NOT mocked"
+	logger.info "mocked"
 	return {
 		scopes: githubScopes
 		done: () ->
-			# nock = nock.cleanAll()
+			nock = nock.cleanAll()
 			logger.info "unmocked"
 			# scope.done() for scope in githubScopes
 	}

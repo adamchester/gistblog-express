@@ -27,25 +27,26 @@ describe 'shared', ->
 
 	# set our module expectations
 	expectedExports =
-		topLevelPages: 					[ a.IsObject, a.HasFieldsOfEach(topLevelPageFields) ]
-		isTopLevelPage: 				[ a.IsFunction ] # todo: bother doing this?
-		ViewModel:						[ a.ReturnsFields(baseViewModelFields, 'myTitle', 'myPageTemplateName') ] #todo check fields
-		SharedLayoutViewModel:		[ a.ReturnsFields(sharedViewModelFields, s.topLevelPages.index, ['tag1', 'tag2'], [{ id:1 }] ) ]
+		topLevelPages: [ a.IsObject, a.HasFieldsOfEach(topLevelPageFields) ]
+		isTopLevelPage: [ a.IsFunction ] # todo: bother doing this?
+		ViewModel: [ a.ReturnsFields(baseViewModelFields, 'myTitle', 'myPageTemplateName') ] #todo check fields
+		SharedLayoutViewModel: [ a.ReturnsFields(sharedViewModelFields, s.topLevelPages.index, ['tag1', 'tag2'], [{ id:1 }] ) ]
 
 		# todo sharedViewModelFields, topLevelMenuItemFields, readingListTagFields
-		getPostsForTagViewModel:		[ a.MustCallbackWithFields(postsForTagFields, validTagName1)]
-		getSharedLayoutViewModel: 	[ a.MustCallback(s.topLevelPages.index) ]
-		getAboutViewModel: 			[ a.MustCallbackWithFields(baseViewModelFields) ]
-		getIndexViewModel: 			[ a.MustCallbackWithFields(indexViewModelFields) ]
-		getPostViewModel: 			[ a.MustCallback(validPostId1), a.MustCallback(validPostId1AsString) ]
-		getTwitterViewModel:			[ a.MustCallbackWithFields(twitterViewModelFields) ]
-		getReadingTagViewModel:		[ a.MustCallbackWithFields( readingTagViewModelFields, 'abc') ]
-		getReadingListViewModel:		[ a.MustCallbackWithFields( readingListViewModelFields ) ]
+		getPostsForTagViewModel: [ a.MustCallbackWithFields(postsForTagFields, validTagName1)]
+		getSharedLayoutViewModel: [ a.MustCallback(s.topLevelPages.index) ]
+		getAboutViewModel: [ a.MustCallbackWithFields(baseViewModelFields) ]
+		getIndexViewModel: [ a.MustCallbackWithFields(indexViewModelFields) ]
+		getPostViewModel: [ a.MustCallback(validPostId1), a.MustCallback(validPostId1AsString) ]
+		getTwitterViewModel: [ a.MustCallbackWithFields(twitterViewModelFields) ]
+		getReadingTagViewModel: [ a.MustCallbackWithFields( readingTagViewModelFields, 'abc') ]
+		getReadingListViewModel: [ a.MustCallbackWithFields( readingListViewModelFields ) ]
 
 	describe 'exports', ->
 		scopes = null
 		beforeEach -> scopes = th.mockGithubApis [validPostId1, validPostId2], invalidPostId
 		afterEach -> scopes.done()
 
-		it 'should have the correct exports', (done) -> a.verify expectedExports, '../lib/shared', done
+		it 'should have the correct exports', (done) ->
+			a.verify expectedExports, '../lib/shared', done
 

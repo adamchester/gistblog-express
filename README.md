@@ -11,7 +11,7 @@ To run:
 
 ```cli
     npm install
-```    
+```
 
 1. start gistblog-express
 

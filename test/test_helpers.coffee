@@ -37,14 +37,14 @@ mockGithubApis = (validGistIds, invalidGistId) ->
 
 	allowUnmocked = false
 
-	# return mockGithubApisRecorder()
+	return mockGithubApisRecorder()
 
 	if validGistIds is undefined then validGistIds = [2944558, 2861047]
 	if invalidGistId is undefined then invalidGistId = 9999999999
 
-	markdownApiNock = new nock('https://api.github.com/markdown', { allowUnmocked })#.log(console.log)
-	gistsApiNock = new nock('https://api.github.com/gists', { allowUnmocked })#.log(console.log)
-	gistsRawNock = new nock('https://gist.github.com/', { allowUnmocked })#.log(console.log)
+	markdownApiNock = new nock('https://api.github.com/markdown', { allowUnmocked }).log(console.log)
+	gistsApiNock = new nock('https://api.github.com/gists', { allowUnmocked }).log(console.log)
+	gistsRawNock = new nock('https://gist.github.com/', { allowUnmocked }).log(console.log)
 
 	for validGistsId in validGistIds
 		gistJsonPath = __dirname + "/assets/gists_#{validGistsId}.json"

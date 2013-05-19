@@ -1,0 +1,56 @@
+{
+  "name": "gistblog-express",
+  "description": "A blog, based on gistblog, using expressjs.",
+  "version": "0.0.2",
+  "private": true,
+  "homepage": "https://github.com/adamchester/gistblog-express",
+  "author": "Adam <adamchester@gmail.com>",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamchester/gistblog-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/adamchester/gistblog-express/issues"
+  },
+  "licenses": {
+    "type": "MIT",
+    "url": "https://github.com/adamchester/gistblog-express/blob/master/LICENSE-MIT"
+  },
+  "scripts": {
+    "start": "node app",
+    "dev": "node-dev app",
+    "test": "mocha"
+  },
+  "dependencies": {
+    "express": ">= 3.0.0beta4",
+    "jade": ">= 0.26.3",
+    "request": ">= 2.9.202",
+    "underscore": ">= 1.3.3",
+    "async": ">= 0.1.22",
+    "path": ">= 0.4.9",
+    "pygments": ">= 0.1.3",
+    "node-pocket": ">= 0.2.4",
+    "winston": ">= 0.6.2"
+  },
+  "devDependencies": {
+    "node-dev": ">= 0.2.4",
+    "coffee-script": ">= 1.3.3",
+    "assert": ">= 0.4.9",
+    "nock": ">= 0.13.3",
+    "grunt": "~0.3.11"
+  },
+  "readmeFilename": "README.md",
+  "gitHead": "5c4f91bee030ec81ce507fd460f38b40dae0933b",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "gist",
+    "blog"
+  ],
+  "license": "BSD"
+}

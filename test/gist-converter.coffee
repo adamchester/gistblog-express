@@ -2,6 +2,8 @@
 describe 'gist-converter', ->
   assert = require 'assert'
   async = require 'async'
+  util = require 'util'
+  request = require 'request'
   _ = require 'underscore'
   nock = require 'nock'
   gc = require '../lib/gist-converter'
@@ -10,15 +12,28 @@ describe 'gist-converter', ->
   describe '#toHtmlViaGithub()', ->
 
     it 'should convert succesfully', (done) ->
+      
+      url = 'https://api.github.com/markdown'
+      postBody =
+        text: 'abc **abc** /blah/',
+        mode: 'gfm',
+        context: 'adamchester'
 
-      githubApi = new nock('https://api.github.com')#.log(console.log)
-        .post('/markdown', { text: 'abc **abc** /blah/',  mode: 'gfm', context: 'adamchester' })
-        .reply(200, '<p>abc <strong>abc</strong> /blah/</p>')
+      headers = {'user-agent':'gistblog'} 
 
-      gc.toHtmlViaGithub 'abc **abc** /blah/', (err, html) ->
-        assert not err
-        assert.equal html, '<p>abc <strong>abc</strong> /blah/</p>'
+      request { url, json: postBody, headers }, (err, resp, body) ->
+        console.log "err: #{err}, code: #{resp.statusCode}, body: #{util.inspect body}"
         done()
+
+      # githubApi = new nock('https://api.github.com').log(console.log)
+      #   .post('/markdown', { text: 'abc **abc** /blah/',  mode: 'gfm', context: 'adamchester' })
+      #   .reply(200, '<p>abc <strong>abc</strong> /blah/</p>')
+
+      # gc.toHtmlViaGithub 'abc **abc** /blah/', (err, html) ->
+      #   console.log err
+      #   assert not err
+      #   assert.equal html, '<p>abc <strong>abc</strong> /blah/</p>'
+      #   done()
 
   # describe '#convert()', ->
   #   it 'should convert backtick-embedded javascript to html correctly', (done) ->

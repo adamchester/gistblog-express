@@ -2,7 +2,7 @@
 --require assert
 --reporter list
 --ui bdd
---timeout 6000
+--timeout 9000
 --growl
 --debug
 --bail

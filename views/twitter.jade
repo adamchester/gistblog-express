@@ -1,7 +1,5 @@
 extends layout
-include mixins/twitter_button
 include mixins/twitter_profile_widget
 block content
 	div.well
-		mixin twitter_button('adamchester')
 		mixin twitter_profile_widget('adamchester', 'auto', 400, 'faves')

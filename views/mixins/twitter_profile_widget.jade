@@ -1,33 +1,4 @@
 
-
 mixin twitter_profile_widget(username, width, height, type, title)
-	if width == undefined
-		- width = 'auto';
-	if height == undefined
-		- height = 400;
-	if type == undefined
-		- type = 'profile';
-	if title == undefined
-		- title = 'The best of Twitter according to';
-
-	script(charset='utf-8', src='http://widgets.twimg.com/j/2/widget.js')
-	script
-		new TWTR.Widget(
-		{version: 2,
-		type: '#{type}',
-		title: '#{title}',
-		subject: 'Adam Chester',
-		rpp: 10,
-		interval: 3000,
-		width: '#{width}',
-		height: '#{height}',
-		theme: { shell: { background: 'transparent', color: 'black' }, tweets: {background: 'transparent' } },
-		features: {
-			scrollbar: false
-			, loop: true
-			, live: true
-			, behavior: 'default'} 
-		})
-		.render()
-		.setUser('#{username}')
-		.start();
+	a.twitter-timeline(href='https://twitter.com/#{username}', data-widget-id='348317054958440448')
+		| Tweets by @adamchester

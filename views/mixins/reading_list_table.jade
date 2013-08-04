@@ -2,14 +2,14 @@
 include reading_list_tag
 
 mixin reading_list_table(items)
-	table.table.table-striped.table-bordered.table-condensed
+	table#reading-list.table.table-striped.table-bordered.table-hover.table-condensed
 		thead: tr
 			th.hide ID
-			th Date Added 
+			th#rl-date-added Date Added 
 				i.icon-time
-			th Link 
+			th#rl-link Link 
 				i.icon-globe
-			th Tags 
+			th#rl-tags Tags 
 				i.icon-tags
 		tbody
 			each item in items

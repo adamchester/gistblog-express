@@ -3,43 +3,47 @@ include mixins/google_analytics
 
 doctype 5
 html
-	head
-		title= title
+    head
+        title= title
 
-		meta(name='description', content='A blog that may be updated, rarely.')
-		meta(name='author', content='Adam Chester')
-		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+        meta(name='description', content='A blog that may be updated, rarely.')
+        meta(name='author', content='Adam Chester')
+        meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
-		link(rel='stylesheet', href='/stylesheets/style.css')
-		link(rel='stylesheet', href='/stylesheets/code.css')
-		link(rel='stylesheet', href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/code.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css')
 
-		link(rel='shortcut icon', href='/favicon.ico')
-		link(rel='apple-touch-icon', href='images/apple-touch-icon.png')
-		link(rel='apple-touch-icon', sizes='72x72', href='images/apple-touch-icon-72x72.png')
-		link(rel='apple-touch-icon', sizes='114x114', href='images/apple-touch-icon-114x114.png')
+        link(rel='shortcut icon', href='/favicon.ico')
+        link(rel='apple-touch-icon', href='images/apple-touch-icon.png')
+        link(rel='apple-touch-icon', sizes='72x72', href='images/apple-touch-icon-72x72.png')
+        link(rel='apple-touch-icon', sizes='114x114', href='images/apple-touch-icon-114x114.png')
 
-		mixin google_analytics
-	body
-		div.navbar.navbar-fixed-top: div.navbar-inner: div.container
-			a.btn.btn-navbar(data-toggle='collapse', data-target='.nav-collapse')
-				span.i-bar: i.icon-chevron-down.icon-white
-			a(class='brand', href='/') Rarely updated
-			div.nav-collapse: ul.nav
-				each link in shared.topLevelMenuItems
-					li(class=link.classes): a(href=link.href)= link.text
+        mixin google_analytics
+    body
+        div.topbar.navbar.navbar-inverse.navbar-static-top
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.nav-collapse')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='/') Rarely updated blog
+          div.nav-collapse.collapse
+            ul.nav.navbar-nav
+                each link in shared.topLevelMenuItems
+                    li(class=link.classes): a(href=link.href)= link.text
 
-		div(class='container-fluid')
-			div.row-fluid
-				div.span9
-					block content
-				div.span3
-					mixin sidebar(shared.topLevelMenuItems, shared.readingListTags, shared.recentPosts, shared.postTags)
-			div#footer
-				footer.footer
-					p| &copy; Adam Chester 2013
-		block body_scripts
-			script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js')
-			script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-			script(type='text/javascript', src='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js')
+        div(class='container')
+            div.row
+                div.col-lg-9
+                    block content
+                div.col-lg-3
+                    mixin sidebar(shared.topLevelMenuItems, shared.readingListTags, shared.recentPosts, shared.postTags)
+            div#footer
+                footer.footer
+                    p| &copy; Adam Chester 2013
+
+        block body_scripts
+            script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js')
+            script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
+            script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js')
 

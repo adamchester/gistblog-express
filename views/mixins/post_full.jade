@@ -9,9 +9,9 @@ mixin post_full(post, usePostLinks)
 			div.post-tags
 				|Tagged with: 
 				for tag in post.tags
-					span.label
+					a.label(href='/posts/tag/' + tag)
 						i.icon-white.icon-tags
-						a(href='/posts/tag/' + tag)=tag
+						|#{tag}
 			a.muted(href=post.gist_url + '#comments')| Read comments on github
 			p| Last updated on #{post.date.toString()}
 

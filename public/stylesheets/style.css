@@ -1,17 +1,19 @@
-body {
-	position: relative;
-	padding-top: 60px;
-}
-
+/* Tag cloud formatting */
 .tag-cloud-small { font-size: small; }
 .tag-cloud-medium { font-size: large; }
 .tag-cloud-large { font-size: x-large; }
 
+/* Reading list - date added column width */
+#rl-date-added { width: 90px; }
+
+/* Make the main container content start after
+   the top navbar */
+/* .container { padding-top: 50px; } */
+
 /* post formatting */
 .blog-post { margin-bottom: 40px; }
 i { padding-right: 2px; }
-span.label { margin-right: 2px; }
-.label a { color: white; }
+a.label { margin-right: 2px; }
 .label { text-transform: uppercase; }
 .post-tags span { margin-right: 2px; }
 .post-metadata [class^="icon-"] { margin-right: 2px; }
@@ -19,26 +21,6 @@ span.label { margin-right: 2px; }
 .post-metadata span { display: inline-block; margin-right: 4px; font-size: x-small !important; }
 .post-footer { padding-top: 10px; color: #999999; }
 
-.nav-list {
-	padding-left: 3px !important;
-	padding-right: 1px !important;
-}
-
-.sidebar-tweets {
-	height: 580px;
-}
-
-.sidebar-nav {
-	padding-left: 11px !important;
-}
-
-.well {
-	-moz-box-shadow: 0 0 5px #888;
-	-webkit-box-shadow: 0 0 5px #888;
-	box-shadow: 0 0 5px #888;
-}
-
-.navbar-fixed-top {
-	box-shadow: 0px 0px 3px #000;
-	border-bottom: 1px solid #999;
-}
+/* Nice little shadows on boxes */
+.well { -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px #888; box-shadow: 0 0 5px #888; }
+.navbar-fixed-top { box-shadow: 0px 0px 3px #000; border-bottom: 1px solid #999; }

@@ -2,17 +2,19 @@
 include twitter_share_post
 
 mixin post_summary(post, linkTitle)
-	if (linkTitle !== undefined && linkTitle === true)
-		h1: a(href=post.url)= post.title
-	else
-		h1= post.title
-	div.post-metadata
-		span.post-date
+	div.jumbotron
+		h2= post.title
+		p
 			i.icon.icon-time
-			|posted #{post.date.toDateString()}
-		span.view-comments
-			a(href=post.gist_url + "#comments")
-				i.icon.icon-comment
-				|view #{post.comment_count} comments on github
-		span.twitter_share_post
+			span.text-muted
+				|Posted #{post.date.toDateString()} in 
+				for tag in post.tags
+					a.label.icon-tag(href='/posts/tag/' + tag)=tag
+		p.pull-right
+			a.badge(href=post.gist_url + '#comments') #{post.comment_count} comments
 			mixin twitter_share_post(post)
+
+		if linkTitle
+			p
+				a.btn.btn-primary.btn-large(href=post.url, data-wtf='') Read more 
+			

@@ -4,11 +4,8 @@
 .tag-cloud-large { font-size: x-large; }
 
 /* Reading list - date added column width */
-#rl-date-added { width: 90px; }
-
-/* Make the main container content start after
-   the top navbar */
-/* .container { padding-top: 50px; } */
+#rl-date-added { width: 95px; }
+.reading-list-tag { display: inline-block !important; }
 
 /* post formatting */
 .blog-post { margin-bottom: 40px; }

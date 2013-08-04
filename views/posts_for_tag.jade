@@ -3,6 +3,9 @@ extends layout
 include mixins/post_full
 
 block content
-  each post in posts
-    mixin post_full(post, true)
+    div.well
+        |You are now viewing posts for 
+        span.label #{tagName}
+    each post in posts
+        mixin post_summary(post, true)
 

@@ -1,22 +1,19 @@
 
-/*jshint node:true */
 module.exports = function(grunt) {
   'use strict';
+
+  grunt.option('color', false);
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-coffeelint');
 
   // Project configuration.
   grunt.initConfig({
     pkg: '<json:package.json>',
-    test: {
-      files: ['test/**/*.coffee']
-    },
-    lint: {
-      files: ['grunt.js', 'app.js', 'lib/**/*.js!marked-async.js', 'test/**/*.js']
-    },
-    watch: {
-      files: '<config:lint.files>',
-      tasks: 'default'
+    coffeelint: {
+      app: ['test/**/*.coffee']
     },
     jshint: {
+      files: ['Gruntfile.js', 'app.js', 'lib/**/*.js', '!lib/marked-async.js', 'routes/**/*.js', 'middleware/**/*.js', 'test/**/*.js'],
       options: {
         curly: true,
         eqeqeq: true,
@@ -37,6 +34,6 @@ module.exports = function(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint test');
+  grunt.registerTask('default', ['jshint', /*'coffeelint'*/]);
 
 };

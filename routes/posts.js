@@ -10,7 +10,7 @@ module.exports = function(app) {
 	*/
 	app.get('/', l.forTopLevelPage(l.topLevelPages.index), function index (req, res) {
 		s.getIndexViewModel(function (error, viewModel) {
-			if (error) throw error;
+			if (error) { throw error; }
 			res.render(viewModel.pageTemplateName, viewModel);
 		});
 	});
@@ -30,7 +30,7 @@ module.exports = function(app) {
 	app.get('/posts/:id', l.withSharedLayout(), function post (req, res) {
 		var postId = req.params.id;
 		s.getPostViewModel(postId, function (error, viewModel) {
-			if (error) throw error;
+			if (error) { throw error; }
 			res.render(viewModel.pageTemplateName, viewModel);
 		});
 	});

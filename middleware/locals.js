@@ -1,3 +1,4 @@
+"use strict";
 
 /**
  * this piece of middleware adds a variable named 'base' to the model

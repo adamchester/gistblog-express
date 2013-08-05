@@ -1,3 +1,4 @@
+"use strict";
 
 var s = require('../lib/shared'),
     util = require('util')

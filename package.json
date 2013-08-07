@@ -6,7 +6,9 @@
   "directories": {
     "test": "test"
   },
- "engines":{"node": "0.10.x"}, 
+  "engines": {
+    "node": "0.8.x"
+  },
   "dependencies": {
     "assert": "~0.4.9",
     "async": "~0.2.7",

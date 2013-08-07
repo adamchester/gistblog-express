@@ -1,10 +1,4 @@
-/*jshint node: true */
-(function() {
-  'use strict';
-
-/**
- * Module dependencies.
- */
+"use strict";
 
 var express = require('express'),
   util = require('util'),
@@ -58,4 +52,3 @@ http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-}());

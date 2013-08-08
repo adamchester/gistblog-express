@@ -12,6 +12,7 @@ describe 'routes/', ->
 		global: ['/403', '/404'] # note: 500 is handled via middleware/errorHandler.js
 		posts: ['/', '/posts/tag/:tagName', '/posts/:id', '/twitter']
 		reading: ['/reading', '/reading/tags/:tagName']
+		feed: ['/rss']
 
 	it 'should map the correct routes', ->
 

@@ -44,6 +44,7 @@ app.use(require('./middleware/errorHandler')(errorOptions));
 require('./routes/posts')(app);
 require('./routes/reading')(app);
 require('./routes/about')(app);
+require('./routes/feed')(app);
 
 // must happen last
 require('./routes/global')(app);

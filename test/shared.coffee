@@ -17,6 +17,7 @@ describe 'shared', ->
 	readingTagViewModelFields = baseViewModelFields.concat ['items', 'tag']
 	readingListViewModelFields = baseViewModelFields.concat [ 'items' ]
 	postsForTagFields = baseViewModelFields.concat ['posts']
+	feedModelFields = baseViewModelFields.concat ['posts']
 
 	# mock data
 	validTagName1 = 'nodejs'
@@ -41,7 +42,8 @@ describe 'shared', ->
 		getTwitterViewModel: [ a.MustCallbackWithFields(twitterViewModelFields) ]
 		getReadingTagViewModel: [ a.MustCallbackWithFields( readingTagViewModelFields, 'abc') ]
 		getReadingListViewModel: [ a.MustCallbackWithFields( readingListViewModelFields ) ]
-
+		getFeedModel: [ a.MustCallbackWithFields( feedModelFields ) ]
+		
 	describe 'exports', ->
 		scopes = null
 		beforeEach -> scopes = th.mockGithubApis [validPostId1, validPostId2], invalidPostId

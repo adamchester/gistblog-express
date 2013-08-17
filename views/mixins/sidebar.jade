@@ -7,23 +7,27 @@ mixin sidebar(links, tags, recentPosts, postTags)
 	div.well.sidebar-nav
 		div.panel
 			div.panel-heading Recent posts
-			each post in recentPosts
-				li(class=post.classes)
-					a(href=post.url)= post.title
-					| 
-					- var dteString = post.date.toDateString()
-					- dteString = dteString.substring(4, dteString.length)
-					span.text-muted= 'on ' + dteString
+			div.panel-body
+				each post in recentPosts
+					li(class=post.classes)
+						a(href=post.url)= post.title
+						| 
+						- var dteString = post.date.toDateString()
+						- dteString = dteString.substring(4, dteString.length)
+						span.text-muted= 'on ' + dteString
 		if postTags
 			div.panel
-				div.panel-heading Post topics		
-				mixin tag_cloud(postTags)
+				div.panel-heading Post topics
+				div.panel-body
+					mixin tag_cloud(postTags)
 
 		div.panel
 			div.panel-heading Reading List Tags
-			mixin tag_cloud(tags)
+			div.panel-body: mixin tag_cloud(tags)
 
 		div.panel.sidebar-tweets
 			div.panel-heading Favourite tweets
-			mixin twitter_follow_button('adamchester')
-			mixin twitter_profile_widget('adamchester')
+			div.panel-body
+				mixin twitter_follow_button('adamchester')
+				mixin twitter_profile_widget('adamchester')
+				

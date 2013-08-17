@@ -12,7 +12,8 @@ html
 
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href='/stylesheets/code.css')
-        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css')
 
         link(rel='shortcut icon', href='/favicon.ico')
         link(rel='apple-touch-icon', href='images/apple-touch-icon.png')
@@ -21,16 +22,19 @@ html
 
         mixin google_analytics
     body
-        div.topbar.navbar.navbar-inverse.navbar-static-top
-          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.nav-collapse')
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='/') Rarely updated blog
-          div.nav-collapse.collapse
-            ul.nav.navbar-nav
-                each link in shared.topLevelMenuItems
-                    li(class=link.classes): a(href=link.href)= link.text
+        nav.navbar(role='navigation')
+            div.navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(href='/') Rarely updated blog
+            div.collapse.navbar-collapse.navbar-ex1-collapse
+                ul.nav.navbar-nav
+                    each link in shared.topLevelMenuItems
+                        li(class=link.classes): a(href=link.href)= link.text
+
 
         div(class='container')
             div.row
@@ -45,5 +49,5 @@ html
         block body_scripts
             script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js')
             script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-            script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js')
+            script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js')
 

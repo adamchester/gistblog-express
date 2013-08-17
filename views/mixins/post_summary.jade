@@ -8,12 +8,11 @@ mixin post_summary(post, linkTitle)
 			i.glyphicon.glyphicon-time
 			span.text-muted
 				|Posted #{post.date.toDateString()} in 
-				for tag in post.tags
-					span: a.label.label-default.glyphicon.glyphicon-tag(href='/posts/tag/' + tag)=tag
-		p.pull-right
-			a.badge(href=post.gist_url + '#comments') #{post.comment_count} comments
-
+			for tag in post.tags
+				span: a.label.label-default.glyphicon.glyphicon-tag(href='/posts/tag/' + tag)=tag
 		if linkTitle
 			p
-				a.btn.btn-primary.btn-large(href=post.url, data-wtf='') Read more 
-			
+				a.btn.btn-primary(href=post.url, data-wtf='') Read more 
+				a.badge.post-summary-comments-badge(href=post.gist_url + '#comments')=post.comment_count + ' comments'
+
+

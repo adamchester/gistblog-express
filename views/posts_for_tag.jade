@@ -5,7 +5,7 @@ include mixins/post_full
 block content
     div.well
         |You are now viewing posts for 
-        span.label #{tagName}
+        span.label.label-default #{tagName}
     each post in posts
         mixin post_summary(post, true)
 

@@ -11,7 +11,7 @@
 
 /* post formatting */
 .blog-post { margin-bottom: 40px; }
-
+.post-summary-comments-badge { margin-left: 2px; }
 .post-metadata { padding-bottom: 5px; margin-bottom: 5px; border-bottom: solid 1px; }
 .post-metadata span { display: inline-block; margin-right: 4px; font-size: x-small !important; }
 .post-footer { padding-top: 10px; color: #999999; }

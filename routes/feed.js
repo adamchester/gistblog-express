@@ -31,7 +31,7 @@ module.exports = function(app) {
         // example, use the way you prefer to get your posts.
         s.getFeedModel(function(err, model) {
             if(err) {
-                console.log('blah');
+                console.log('feed model error' + err);
                 res.send('404 Not found', 404);
             }
             else {

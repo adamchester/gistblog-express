@@ -33,8 +33,9 @@ html
             div.collapse.navbar-collapse.navbar-ex1-collapse
                 ul.nav.navbar-nav
                     each link in shared.topLevelMenuItems
-                        li(class=link.classes): a(href=link.href)= link.text
-
+                        li(class=link.classes): a(href=link.href, class=link.anchorClasses)= link.text
+                    li: a.glyphicon.glyphicon-book(href='http://feeds.feedburner.com/rarelyupdated')  Subscribe to feed
+                    li: a.glyphicon.glyphicon-edit(href='http://github.com/adamchester/gistblog-express') View source code
 
         div(class='container')
             div.row

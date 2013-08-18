@@ -9,9 +9,8 @@ mixin post_full(post, usePostLinks)
 			div.post-tags
 				|Tagged with: 
 				for tag in post.tags
-					a.label(href='/posts/tag/' + tag)
-						i.icon-white.icon-tags
-						|#{tag}
-			a.muted(href=post.gist_url + '#comments')| Read comments on github
+					a.label.label-default.glyphicon.glyphicon-tag(href='/posts/tag/' + tag)= tag
+			a.muted(href=post.gist_url + '#comments')| Read comments on github 
+				snan.badge= post.comment_count
 			p| Last updated on #{post.date.toString()}
 

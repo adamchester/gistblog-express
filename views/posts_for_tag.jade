@@ -4,7 +4,7 @@ include mixins/post_full
 
 block content
     div.well
-        |You are now viewing posts for 
+        |You are now viewing posts related to  
         span.label.label-default.glyphicon.glyphicon-tag #{tagName}
     each post in posts
         mixin post_summary(post, true)

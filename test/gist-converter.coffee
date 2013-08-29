@@ -11,19 +11,18 @@ describe 'gist-converter', ->
 
   describe '#toHtmlViaGithub()', ->
 
-    it 'should convert succesfully', (done) ->
-      
-      url = 'https://api.github.com/markdown'
-      postBody =
-        text: 'abc **abc** /blah/',
-        mode: 'gfm',
-        context: 'adamchester'
+    # it 'should convert succesfully', (done) ->      
+    #   url = 'https://api.github.com/markdown'
+    #   postBody =
+    #     text: 'abc **abc** /blah/',
+    #     mode: 'gfm',
+    #     context: 'adamchester'
 
-      headers = {'user-agent':'gistblog'} 
+    #   headers = {'user-agent':'gistblog'} 
 
-      request { url, json: postBody, headers }, (err, resp, body) ->
-        console.log "err: #{err}, code: #{resp.statusCode}, body: #{util.inspect body}"
-        done()
+    #   request { url, json: postBody, headers }, (err, resp, body) ->
+    #     console.log "err: #{err}, code: #{resp.statusCode}, body: #{util.inspect body}"
+    #     done()
 
       # githubApi = new nock('https://api.github.com').log(console.log)
       #   .post('/markdown', { text: 'abc **abc** /blah/',  mode: 'gfm', context: 'adamchester' })

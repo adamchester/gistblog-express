@@ -21,7 +21,8 @@
     "request": "~2.20.0",
     "underscore": "~1.4.4",
     "winston": "~0.7.1",
-    "feed": "~0.2.3"
+    "feed": "~0.2.3",
+    "marked": "~0.2.9"
   },
   "devDependencies": {
     "grunt-cli": "~0.1.9",

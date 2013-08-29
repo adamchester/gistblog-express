@@ -42,9 +42,9 @@ mockGithubApis = (validGistIds, invalidGistId) ->
 	if validGistIds is undefined then validGistIds = [2944558, 2861047]
 	if invalidGistId is undefined then invalidGistId = 9999999999
 
-	markdownApiNock = new nock('https://api.github.com/markdown', { allowUnmocked }).log(console.log)
-	gistsApiNock = new nock('https://api.github.com/gists', { allowUnmocked }).log(console.log)
-	gistsRawNock = new nock('https://gist.github.com/', { allowUnmocked }).log(console.log)
+	markdownApiNock = new nock('https://api.github.com/markdown', { allowUnmocked })#.log(console.log)
+	gistsApiNock = new nock('https://api.github.com/gists', { allowUnmocked })#.log(console.log)
+	gistsRawNock = new nock('https://gist.github.com/', { allowUnmocked })#.log(console.log)
 
 	for validGistsId in validGistIds
 		gistJsonPath = __dirname + "/assets/gists_#{validGistsId}.json"
@@ -71,13 +71,13 @@ mockGithubApis = (validGistIds, invalidGistId) ->
 	# return our nock scopes, so the caller call done() if necessary
 	githubScopes = [gistsApiNock, gistsRawNock]
 	
-	logger = logging.forModule('mockGithubApis')
-	logger.info "mocked"
+	# logger = logging.forModule('mockGithubApis')
+	# logger.info "mocked"
 	return {
 		scopes: githubScopes
 		done: () ->
 			nock = nock.cleanAll()
-			logger.info "unmocked"
+			# logger.info "unmocked"
 			# scope.done() for scope in githubScopes
 	}
 

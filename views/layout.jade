@@ -12,8 +12,8 @@ html
 
         link(rel='stylesheet', href='/stylesheets/style.css')
         link(rel='stylesheet', href='/stylesheets/code.css')
-        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css')
-        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css')
+        link(rel='stylesheet', href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css')
 
         link(rel='shortcut icon', href='/favicon.ico')
         link(rel='apple-touch-icon', href='images/apple-touch-icon.png')
@@ -22,7 +22,7 @@ html
 
         mixin google_analytics
     body
-        nav.navbar(role='navigation')
+        nav.navbar.navbar-default(role='navigation')
             div.navbar-header
                 button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
                     span.sr-only Toggle navigation
@@ -34,14 +34,14 @@ html
                 ul.nav.navbar-nav
                     each link in shared.topLevelMenuItems
                         li(class=link.classes): a(href=link.href, class=link.anchorClasses)= link.text
-                    li: a.glyphicon.glyphicon-book(href='http://feeds.feedburner.com/rarelyupdated')  RSS Feed
-                    li: a.glyphicon.glyphicon-edit(href='http://github.com/adamchester/gistblog-express')  Source Code
+                    li: a.glyphicon.glyphicon-share-alt(href='http://feeds.feedburner.com/rarelyupdated') RSS
+                    li: a.glyphicon.glyphicon-edit(href='http://github.com/adamchester/gistblog-express') Source
 
         div(class='container')
             div.row
-                div.col-lg-9
+                div.col-xs-12.col-sm-8.col-md-8
                     block content
-                div.col-lg-3
+                div.col-xs-6.col-sm-4.col-md-4
                     mixin sidebar(shared.topLevelMenuItems, shared.readingListTags, shared.recentPosts, shared.postTags)
             div#footer
                 footer.footer
@@ -50,5 +50,5 @@ html
         block body_scripts
             script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js')
             script(type='text/javascript', src='//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-            script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/js/bootstrap.min.js')
-
+            script(type='text/javascript', src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
+        

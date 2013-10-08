@@ -24,6 +24,4 @@ a.label { margin-right: 2px; }
 
 /* Labels/tags are upper-case */
 .label { text-transform: uppercase; }
-
-/* Nice little shadows on boxes */
-.well { -moz-box-shadow: 0 0 5px #888; -webkit-box-shadow: 0 0 5px #888; box-shadow: 0 0 5px #888; }
+.label.glyphicon { text-align: top; }

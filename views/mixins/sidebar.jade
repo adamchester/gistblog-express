@@ -5,7 +5,7 @@ include tag_cloud
 
 mixin sidebar(links, tags, recentPosts, postTags)
 	div.sidebar-nav
-		div.panel
+		div.panel.panel-default
 			div.panel-heading Recent posts
 			div.panel-body
 				each post in recentPosts
@@ -16,16 +16,16 @@ mixin sidebar(links, tags, recentPosts, postTags)
 						- dteString = dteString.substring(4, dteString.length)
 						span.text-muted= 'on ' + dteString
 		if postTags
-			div.panel
+			div.panel.panel-default
 				div.panel-heading Post topics
 				div.panel-body
 					mixin tag_cloud(postTags)
 
-		div.panel
-			div.panel-heading Reading List Tags
+		div.panel.panel-default
+			div.panel-heading Reading list tags
 			div.panel-body: mixin tag_cloud(tags)
 
-		div.panel.sidebar-tweets
+		div.panel.panel-default.sidebar-tweets
 			div.panel-heading Favourite tweets
 			div.panel-body
 				mixin twitter_follow_button('adamchester')

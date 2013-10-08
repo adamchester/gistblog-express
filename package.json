@@ -1,13 +1,13 @@
 {
   "name": "gistblog-express",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A blog engine using github gists as the post store.",
   "main": "app.js",
   "directories": {
     "test": "test"
   },
   "engines": {
-    "node": "0.8.x"
+    "node": "0.10.x"
   },
   "dependencies": {
     "assert": "~0.4.9",

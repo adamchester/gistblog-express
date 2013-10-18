@@ -34,14 +34,14 @@ html
                 ul.nav.navbar-nav
                     each link in shared.topLevelMenuItems
                         li(class=link.classes): a(href=link.href, class=link.anchorClasses)= link.text
-                    li: a.glyphicon.glyphicon-share-alt(href='http://feeds.feedburner.com/rarelyupdated') RSS
-                    li: a.glyphicon.glyphicon-edit(href='http://github.com/adamchester/gistblog-express') Source
+                    li: a(href='http://feeds.feedburner.com/rarelyupdated') RSS
+                    li: a(href='http://github.com/adamchester/gistblog-express') Source
 
         div(class='container')
             div.row
-                div.col-xs-12.col-sm-8.col-md-8
+                div.col-xs-12.col-sm-12.col-md-9
                     block content
-                div.col-xs-6.col-sm-4.col-md-4
+                div.col-xs-12.col-sm-12.col-md-3
                     mixin sidebar(shared.topLevelMenuItems, shared.readingListTags, shared.recentPosts, shared.postTags)
             div#footer
                 footer.footer

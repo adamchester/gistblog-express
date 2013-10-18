@@ -18,10 +18,10 @@
 
 /* Icons, tags have a small space between them */
 i { padding-right: 2px; }
-a.label { margin-right: 2px; }
+a.label { padding-bottom: .4em;  margin-right: 2px; }
 .post-tags span { margin-right: 2px; }
 .post-metadata [class^="icon-"] { margin-right: 2px; }
 
 /* Labels/tags are upper-case */
-.label { text-transform: uppercase; }
-.label.glyphicon { text-align: top; }
+.label { padding-bottom: .4em; text-transform: uppercase; }
+.label.glyphicon { text-align: right; }
